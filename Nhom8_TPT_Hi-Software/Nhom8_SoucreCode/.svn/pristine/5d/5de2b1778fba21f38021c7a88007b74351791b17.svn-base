@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Models.Framework.LoaiSanPham>
+@{
+	ViewBag.Title = "Danh sách loại sản phẩm";
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+	int i = 0;
+}
+
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		Loại sản phẩm
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							Số thứ tự
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.TenLoaiSanPham)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.DVT)
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@{i++;}
+								@i
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.TenLoaiSanPham)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.DVT)
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

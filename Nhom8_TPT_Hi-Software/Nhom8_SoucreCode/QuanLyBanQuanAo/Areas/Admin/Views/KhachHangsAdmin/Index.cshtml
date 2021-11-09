@@ -1,0 +1,101 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.KhachHang>
+
+@{
+	ViewBag.Title = "Danh sách khách hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNV", rowsPerPage: 5);
+}
+
+<h3>Danh sách khách hàng</h3>
+<div>
+	@using (Html.BeginForm("Index", "KhachHangsAdmin", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+
+		<table class="table1" align="center">
+			<tr>
+				<td>Mã khách hàng</td>
+				<td><input type="text" name="maKH" value="@ViewBag.maKhachHang" /></td>
+			</tr>
+			<tr>
+				<td>Họ tên</td>
+				<td><input type="text" name="hoTen" value="@ViewBag.hoTen" /></td>
+			</tr>
+			<tr>
+				<td>Giới tính</td>
+				<td>
+					@if (@ViewBag.gioiTinh == null)
+					{
+						<input type="radio" name="gioiTinh" value="1" /><text>Nam</text>
+						<input type="radio" name="gioiTinh" value="0" /><text>Nữ</text>
+					}
+					else if (@ViewBag.gioiTinh == "1")
+					{
+						<input type="radio" name="gioiTinh" checked value="1" /><text>Nam</text>
+						<input type="radio" name="gioiTinh" value="0" /><text>Nữ</text>
+					}
+					else
+					{
+						<input type="radio" name="gioiTinh" value="1" /><text>Nam</text>
+						<input type="radio" name="gioiTinh" checked value="0" /><text>Nữ</text>
+					}
+				</td>
+			</tr>
+			<tr>
+				<td>Số điện thoại</td>
+				<td><input type="text" name="soDienThoai" value="@ViewBag.SoDienThoai" /></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" name="email" value="@ViewBag.Email" /></td>
+			</tr>
+			<tr>
+				<td>Tỉnh thành</td>
+				<td><input type="text" name="tinhThanh" value="@ViewBag.TinhThanh" /></td>
+			</tr>
+			<tr>
+				<td>Địa chỉ</td>
+				<td><input type="text" name="diaChi" value="@ViewBag.DiaChi" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" name="submit" value="Tìm kiếm" style="margin-left:5px; width:100px; background-color: blue;color:white" />
+					<input type="button" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;width:100px; background-color: blue;color:white" onclick="location.href='@Url.Action("Index", "KhachHangsAdmin")'" />
+				</td>
+			</tr>
+		</table>
+	}
+</div>
+
+
+<div id="gridContent">
+	@ViewBag.TB
+	@grid.GetHtml(
+	tableStyle: "table table-bordered table-hover",
+	footerStyle: "grid-footer",
+	fillEmptyRows: true,
+	mode: WebGridPagerModes.Numeric,
+	alternatingRowStyle: "alternatingRowStyle",
+	// Colums in grid.
+	columns: new[]
+	{
+		// Số dòng.
+		grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+		// The model fields to display.
+		grid.Column("MaKhachHang","Mã khách hàng"),
+		grid.Column("Ho","Họ"),
+		grid.Column("Ten","Tên"  ),
+		grid.Column("GioiTinh","Giới tính",format: (@item) => @item.GioiTinh==true?"Nam":"Nữ"),
+		grid.Column("SDT","Số điện thoại"  ),
+		grid.Column("Email","Email"  ),
+		grid.Column("MatKhau","Mật khẩu"  ),
+		grid.Column("TinhOrTp","Tỉnh thành"  ),
+		grid.Column("DiaChi","Địa chỉ"  ),
+		grid.Column("Chức năng", format: @<text>
+		<a href="@Url.Action("Edit",new { id = item.MaKhachHang})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><i class="bi bi-pencil"></i></abbr></a>
+		<a href="@Url.Action("Details",new { id = item.MaKhachHang})" class="edit-btn"><abbr title="Xem chi tiết"><i class="bi bi-briefcase"></i></abbr></a>
+		<a href="@Url.Action("Delete",new { id = item.MaKhachHang})" class="edit-btn"><abbr title="Xóa dữ liệu"><i class="bi bi-file-earmark-x"></i></abbr></a>
+	</text>),
+	})
+</div>

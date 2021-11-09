@@ -1,0 +1,57 @@
+﻿@model Models.Framework.NhanHieu
+
+@{
+	ViewBag.Title = "Xem chi tiết";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Thông tin chi tiết</h2>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200px" height="200px" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/brands/@Html.DisplayFor(model => model.AnhNH)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<div>
+				<hr />
+				<dl class="dl-horizontal">
+					<dt>
+						Tên nhãn hiệu
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.TenNhanHieu)
+					</dd>
+
+					<dt>
+						Ghi chú
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.GhiChu)
+					</dd>
+
+					<dt>
+						Ảnh nhãn hiệu
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.AnhNH)
+					</dd>
+
+				</dl>
+			</div>
+			<p style="padding-top: 30px">
+				@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaNhanHieu }) |
+				@Html.ActionLink("Xóa", "Delete", new { id = Model.MaNhanHieu }) |
+				@Html.ActionLink("Quay lại", "Index")
+			</p>
+		</div>
+	</div>
+</div>
+
+@Html.Partial("_SanPhamPartial", Model.SanPhams)

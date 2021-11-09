@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.NhatKy>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Username)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TinhTrang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.GhiNho)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model.Reverse())
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Username)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.TinhTrang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.GhiNho)
+			</td>
+		</tr>
+	}
+
+</table>
+

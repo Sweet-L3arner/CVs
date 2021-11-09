@@ -1,0 +1,93 @@
+﻿@model Models.Framework.SanPham
+@{
+	ViewBag.Title = "ChiTietSanPham";
+	Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+</style>
+<h2>Thông tin chi tiết</h2>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="300" height="300" style="border-radius:20%;margin-left:30px;margin-top:20px;" src="~/Images/products/@Html.DisplayFor(model => model.AnhSP)" />
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<br />
+			<table>
+				<tr>
+					<th>Tên sản phẩm: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.TenSanPham)</td>
+				</tr>
+
+				<tr>
+					<th>Nơi sản xuất: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.NoiSanXuat)</td>
+				</tr>
+
+				<tr>
+					<th>Đơn giá: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@String.Format("{0:0,0}", Model.DonGia) VND</td>
+				</tr>
+
+				<tr>
+					<th>Tình trạng: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.TinhTrang)</td>
+				</tr>
+
+				<tr>
+					<th>Mô tả: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.MoTa)</td>
+				</tr>
+
+				<tr>
+					<th>Loại sản phẩm: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.LoaiSanPham.TenLoaiSanPham)</td>
+				</tr>
+
+				<tr>
+					<th>Nhãn hiệu: </th>
+					<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+					<td>@Html.DisplayFor(model => model.NhanHieu.TenNhanHieu)</td>
+				</tr>
+
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						@using (Html.BeginForm("ThemGioHang", "GioHang", new { @maSanPham = Model.MaSanPham, @strURL = Request.Url.ToString() }))
+						{
+							<input type="submit" style="cursor:pointer" value="Chọn mua" class="btn btn-danger" />
+						}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="mt-5">
+	@Html.Partial("_PhanHoiPatial", Model.PhanHois)
+	<br />
+	<br />
+	@using (Html.BeginForm("Index", "PhanHois", new { @maSanPham = Model.MaSanPham }))
+	{
+
+		<input type="text" name="feedback" />
+
+		<input type="submit" style="cursor:pointer" value="Phản hồi" class="btn btn-success" />
+	}
+</div>

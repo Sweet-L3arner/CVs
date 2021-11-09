@@ -1,0 +1,99 @@
+﻿@model Models.Framework.SanPham
+
+@{
+	ViewBag.Title = "Xóa sản phẩm";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h4 style="color:red;"> Bạn có chắc chắn xóa thông tin này?</h4>
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200px" height="200px" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/products/@Html.DisplayFor(model => model.AnhSP)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<div>
+				<hr />
+				<dl class="dl-horizontal">
+					<dt>
+						Tên sản phẩm
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.TenSanPham)
+					</dd>
+
+					<dt>
+						Nơi sản xuất
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.NoiSanXuat)
+					</dd>
+
+					<dt>
+						Đơn giá
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.DonGia)
+					</dd>
+
+					<dt>
+						Tình trạng
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.TinhTrang)
+					</dd>
+
+					<dt>
+						Mô tả
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.MoTa)
+					</dd>
+
+					<dt>
+						Ảnh sản phấm
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.AnhSP)
+					</dd>
+
+					<dt>
+						Loại sản phẩm
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.LoaiSanPham.TenLoaiSanPham)
+					</dd>
+
+					<dt>
+						Nhãn hiệu
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.NhanHieu.TenNhanHieu)
+					</dd>
+
+				</dl>
+			</div>
+
+		</div>
+	</div>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Xóa" class="btn btn-danger" /> |
+			@Html.ActionLink("Quay lại", "Index")
+		</div>
+	}
+</div>

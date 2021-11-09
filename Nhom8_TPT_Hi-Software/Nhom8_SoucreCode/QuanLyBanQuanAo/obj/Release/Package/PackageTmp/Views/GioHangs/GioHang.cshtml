@@ -1,0 +1,83 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.GioHang>
+
+@{
+	ViewBag.Title = "Giỏ hàng";
+	Layout = "~/Views/Shared/_LayoutUser.cshtml";
+	int i = 0;
+}
+
+@if (Model == null)
+{
+	<h3 style="text-align:center">Giỏ hàng chưa có gì</h3>
+}
+else
+{
+	<div>
+		<h3>Giỏ hàng</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>STT</td>
+
+					<td scope="col">Ảnh sản phẩm</td>
+
+					<td scope="col">Mã sản phẩm</td>
+
+					<td scope="col">Tên sản phẩm</td>
+
+					<td scope="col">Đơn giá</td>
+
+					<td scope="col">Số lượng</td>
+
+					<td scope="col">Thành tiền</td>
+				</tr>
+			</thead>
+			@foreach (var item in Model)
+			{
+				<tr>
+					@{
+						i++;
+					}
+					<td scope="row">@i</td>
+
+					<td><img src="@Url.Content("~/Images/products/" + item.AnhSanPhamGioHang)" width="50px" height="50px"</td>
+
+					<td>@item.MaSanPhamGioHang</td>
+
+					<td>@item.TenSanPhamGioHang</td>
+
+					<td>@String.Format("{0:0,0}", item.DonGiaGioHang) VND</td>
+
+					<td>@item.SoLuongGioHang</td>
+
+					<td>@String.Format("{0:0,0}", item.ThanhTien()) VND</td>
+
+				</tr>
+			}
+			<tr>
+				<td colspan="7" style="text-align:right">
+					Tổng tiền:  @String.Format("{0:0,0}", @ViewBag.TongTien) VND
+				</td>
+			</tr>
+			<tr>
+				<td>
+					@using (Html.BeginForm("DatHang", "GioHangs", new { @maDonViVanChuyen = ViewBag.MaDonViVanChuyen }))
+					{
+
+						<label>Chọn đơn vị vận chuyển: </label> @Html.DropDownList("MaDonViVanChuyen", null, htmlAttributes: new { @class = "form-control" })
+						<label>Nhập địa chỉ giao hàng: </label> <input type="text" name="diaChiGiao" />
+						<p>Nếu quý khách muốn giao tại nhà thì không cần phải nhập!</p>
+						<input type="submit" value="Đặt hàng" class="btn btn-primary" />
+					}
+				</td>
+				<td colspan="6" style="text-align:right">
+					<div class="btn btn-success" style="margin-top: 2px; width:200px;">
+						<a href="@Url.Action("SuaGioHang", "GioHangs")" style="text-decoration: none;color:whitesmoke;">
+							Chỉnh sửa giỏ hàng
+						</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+}

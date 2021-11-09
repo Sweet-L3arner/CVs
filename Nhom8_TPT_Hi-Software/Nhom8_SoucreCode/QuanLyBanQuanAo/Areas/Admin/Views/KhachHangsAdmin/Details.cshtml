@@ -1,0 +1,50 @@
+﻿@model QuanLyBanQuanAo.Models.KhachHang
+
+@{
+	ViewBag.Title = "Thông tin khách hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="text-align:center;">Thông tin khách hàng</h3>
+<hr />
+
+<div class="row">
+	<div class="col-md-5">
+		<dl class="row">
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.Ho)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.Ho)</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.Ten)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.Ten)</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.GioiTinh)</dt>
+			<dd class="col-sm-9 text-left">
+				@{ var gtinh = "";
+					if (Model.GioiTinh == true)
+					{ gtinh = "Nam"; }
+					else
+					{ gtinh = "Nữ"; } }
+				@gtinh
+			</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.SDT)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.SDT)</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.Email)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.Email)</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.TinhOrTP)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.TinhOrTP)</dd>
+
+			<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.DiaChi)</dt>
+			<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.DiaChi)</dd>
+
+			<dt class="col-sm-3 text-right">
+				@Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaKhachHang }, new { @class = "btn btn-warning"})
+			</dt>
+		</dl>
+	</div>
+	<div>
+		@Html.Partial("_PartialDonDatHangs", Model.DonDatHangs);
+	</div>
+</div>

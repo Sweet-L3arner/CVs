@@ -1,0 +1,53 @@
+﻿<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+	<div class="sb-sidenav-menu">
+		<div class="nav">
+			<div class="sb-sidenav-menu-heading">Danh mục</div>
+
+			<a class="nav-link" href="@Url.Action("Index", "LoaiSanPhamA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-bookmark-heart"></i></div>
+				Loại sản phẩm
+			</a>
+
+			<a class="nav-link" href="@Url.Action("Index", "NhanHieuA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-bag-check"></i></div>
+				Nhãn hiệu
+			</a>
+
+			<a class="nav-link" href="@Url.Action("Index", "SanPhamA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-box-seam"></i></div>
+				Sản phẩm
+			</a>
+
+			<div class="sb-sidenav-menu-heading">Người dùng</div>
+
+			<a class="nav-link" href="@Url.Action("Index", "KhachHangA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
+				Khách hàng
+			</a>
+
+			<a class="nav-link" href="@Url.Action("Index", "NhanVienA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-person-check"></i></div>
+				Nhân viên
+			</a>
+
+			<div class="sb-sidenav-menu-heading">Đơn hàng</div>
+
+			<a class="nav-link" href="@Url.Action("Index", "DonDatHangA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-bag-dash"></i></div>
+				Đơn đặt hàng
+			</a>
+
+			<div class="sb-sidenav-menu-heading">Vận chuyển</div>
+
+			<a class="nav-link" href="@Url.Action("Index", "DonViVanChuyenA")">
+				<div class="sb-nav-link-icon"><i class="bi bi-truck"></i></div>
+				Đơn vị vận chuyển
+			</a>
+
+		</div>
+	</div>
+	<div class="sb-sidenav-footer">
+		<div class="small">Đang đăng nhập:</div>
+		@ViewBag.Username
+	</div>
+</nav>

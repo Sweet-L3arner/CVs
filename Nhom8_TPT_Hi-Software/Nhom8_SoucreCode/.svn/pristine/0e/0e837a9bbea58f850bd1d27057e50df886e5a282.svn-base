@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Models.Framework.DonViVanChuyen>
+
+@{
+	ViewBag.Title = "Danh sách đơn vị vận chuyển";
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		Đơn vị vận chuyển
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							@Html.DisplayNameFor(model => model.TenDonVi)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.SDT)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Email)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.AnhDVVC)
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.TenDonVi)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.SDT)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Email)
+							</td>
+							<td>
+								<img src="~/Images/shippers/@Html.DisplayFor(modelItem => item.AnhDVVC)" width="250" height="100" />
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+

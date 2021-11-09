@@ -1,0 +1,93 @@
+﻿using CryptoLib;
+using Models.Dao;
+using Models.Framework;
+using QuanLyBanQuanAo.Areas.Admin.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
+
+namespace QuanLyBanQuanAo.Areas.Admin.Controllers
+{
+    public class LoginAController : Controller
+    {
+        private QuanLyBanQuanAoEntities db = new QuanLyBanQuanAoEntities();
+
+        DateTime LayThoiGian()
+        {
+            return DateTime.Now;
+        }
+
+        // GET: Admin/LoginA
+        [HttpGet]
+        public ActionResult Index()
+        {
+            ViewBag.Admin = 1;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(LoginModel model, NhatKy nhatKy)
+        {
+
+            var result = new AccountModel().Login(model.UsernameLoginA, Encryptor.MD5Hash(model.PasswordLoginA), model.QuanLy);
+
+            Session["Staff"] = model.UsernameLoginA;
+            Session["QuanLy"] = model.QuanLy;
+
+            // Check xem đây có phải là tài khoản của quản lý hay không.
+            if (result && ModelState.IsValid && model.QuanLy == true)
+            {
+                FormsAuthentication.SetAuthCookie(model.UsernameLoginA, model.RememberMe);
+
+                // Lưu nhật ký đăng nhập của quản lý.
+                nhatKy.Username = model.UsernameLoginA;
+                nhatKy.TinhTrang = "Đăng nhập - Quản lý";
+                nhatKy.ghiNho = LayThoiGian();
+                db.NhatKies.Add(nhatKy);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "AdminHome");
+            }
+            // Check xem đây có phải là tài khoản của nhân viên hay không.
+            else if (result && ModelState.IsValid && model.QuanLy == false)
+            {
+                FormsAuthentication.SetAuthCookie(model.UsernameLoginA, model.RememberMe);
+
+                // Lưu nhật ký đăng xuất của nhân viên.
+                nhatKy.Username = model.UsernameLoginA;
+                nhatKy.TinhTrang = "Đăng nhập - Nhân viên";
+                nhatKy.ghiNho = LayThoiGian();
+                db.NhatKies.Add(nhatKy);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "NhanVienHome", new { area = "NhanViens" });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Logout(NhatKy nhatKy)
+        {
+            FormsAuthentication.SignOut();
+
+            nhatKy.Username = Session["Staff"].ToString();
+            nhatKy.TinhTrang = "Đăng xuất";
+            nhatKy.ghiNho = LayThoiGian();
+            db.NhatKies.Add(nhatKy);
+            db.SaveChanges();
+
+            Session["Staff"] = null;
+            Session["QuanLy"] = null;
+
+            return RedirectToAction("Index", "LoginA");
+        }
+    }
+}

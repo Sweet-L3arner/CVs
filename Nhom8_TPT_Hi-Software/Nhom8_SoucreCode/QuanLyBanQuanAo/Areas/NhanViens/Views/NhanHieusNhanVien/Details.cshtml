@@ -1,0 +1,52 @@
+﻿@model QuanLyBanQuanAo.Models.NhanHieu
+@{
+	ViewBag.Title = "Thông tin nhãn hiệu";
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2 style="text-align:center">@Model.TenNhanHieu</h2>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200" height="200" style="border-radius:50%; margin-left:30px; margin-top:20px;" src="~/Images/brands/@Html.DisplayFor(model => model.AnhNH)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<div>
+				<hr />
+				<dl class="dl-horizontal">
+					<dt>
+						@Html.DisplayNameFor(model => model.TenNhanHieu)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.TenNhanHieu)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.TenNhanHieu)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.GhiChu)
+					</dd>
+
+					<dt>
+						@Html.DisplayNameFor(model => model.AnhNH)
+					</dt>
+
+					<dd>
+						@Html.DisplayFor(model => model.AnhNH)
+					</dd>
+
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+
+@Html.Partial("_PartialSanPhams", Model.SanPhams)
+

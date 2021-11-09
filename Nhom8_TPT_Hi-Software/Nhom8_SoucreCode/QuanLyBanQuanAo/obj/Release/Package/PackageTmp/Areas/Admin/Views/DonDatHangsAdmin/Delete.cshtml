@@ -1,0 +1,62 @@
+﻿@model QuanLyBanQuanAo.Models.DonDatHang
+
+@{
+    ViewBag.Title = "Xóa đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+	<h3 style="color:red; text-align:center;">Bạn có muốn xóa đơn hàng @Model.MaDonDatHang?</h3>
+	<hr />
+
+	<dl class="row">
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.MaDonDatHang)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.MaDonDatHang)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.MaKhachHang)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.MaKhachHang)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.MaNhanVien)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.MaNhanVien)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.DonViVanChuyen)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.DonViVanChuyen)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.NgayDatHang)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.NgayDatHang)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.NgayGiaoHang)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.NgayGiaoHang)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.DiaChiGiao)</dt>
+		<dd class="col-sm-9 text-left">@Html.DisplayFor(model => model.DiaChiGiao)</dd>
+
+		<dt class="col-sm-3 text-right">@Html.DisplayNameFor(model => model.TinhTrang)</dt>
+		<dd class="col-sm-9 text-left">
+			@{ var tinhTrang = "";
+				if (Model.TinhTrang == 1)
+				{
+					tinhTrang = "Đã đặt hàng";
+				}
+				else if (Model.TinhTrang == 2)
+				{
+					tinhTrang = "Đã đóng gói và đang vận chuyển";
+				}
+				else
+				{
+					tinhTrang = "Đã giao hàng và thanh toán";
+				}
+			}
+			@tinhTrang
+		</dd>
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		<div class="form-actions no-color">
+			<input type="submit" value="Xóa" class="btn btn-danger" />
+		</div>
+	}
+</div>

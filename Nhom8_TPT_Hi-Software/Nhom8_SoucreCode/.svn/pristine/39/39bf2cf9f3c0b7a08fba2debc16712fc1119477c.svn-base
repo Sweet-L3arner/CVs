@@ -1,0 +1,8 @@
+insert into DonViVanChuyen
+(MaDonVi, TenDonVi, SDT, Email, AnhDVVC)
+values
+('DVVC001', N'VNPost – EMS', '1900 545433', 'vnpostems@gmail.com', 'vietnampost.jpg'),
+('DVVC002', N'Viettel Post', '1800 8198', 'viettelpost@gmail.com', 'viettelpost.jpg'),
+('DVVC003', N'Giaohangnhanh', '1900 0218', 'giaohangnhanh@gmail.com', 'ghn.jpg'),
+('DVVC004', N'Giaohangtietkiem', '1800 6092', 'giaohangtietkiem@gmail.com', 'giaohangtietkiem.jpg'),
+('DVVC005', N'J&T Express', '1900 1088', 'jtexpress@gmail.com', 'jtexpress.jpeg')

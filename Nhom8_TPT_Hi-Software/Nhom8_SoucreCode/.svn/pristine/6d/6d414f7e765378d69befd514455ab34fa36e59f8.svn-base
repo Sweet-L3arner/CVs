@@ -1,0 +1,14 @@
+-- nhãn hiệu
+insert into NhanHieu
+(MaNhanHieu, TenNhanHieu, GhiChu, AnhNH)
+values 
+('NH001', N'Dior' , '...', 'dior.jpg'),
+('NH002', N'Celine', '...', 'celine.jpg'),
+('NH003', N'Saint Laurent', '...', 'saintlaurent.jpg'),
+('NH004', N'Chanel', '...', 'chanel.jpg'),
+('NH005', N'Gucci', '...', 'gucci.jpg'),
+('NH006', N'Adidas', '...', 'adidas.jpg'),
+('NH007', N'Nike', '...', 'nike.jpg'),
+('NH008', N'Calvin Klein', '...', 'calvinklein.jpg'),
+('NH009', N'Puma', '...' , 'puma.jpg')
+go

@@ -1,0 +1,60 @@
+﻿@model QuanLyBanQuanAo.Models.DonViVanChuyen
+
+@{
+	ViewBag.Title = "Xóa đơn vị vận chuyển: " + Model.TenDonVi;
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color: red; text-align:center;">Bạn có chắc chắn muốn xóa @Model.TenDonVi?</h3>
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200" height="200" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/shippers/@Html.DisplayFor(model => model.AnhDVVC)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.TenDonVi)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.TenDonVi)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.SDT)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.SDT)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Email)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Email)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.AnhDVVC)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.AnhDVVC)
+				</dd>
+
+				<dt>
+					@using (Html.BeginForm())
+					{
+						@Html.AntiForgeryToken()
+						<input type="submit" value="Xóa" class="btn btn-danger" />
+					}
+				</dt>
+			</dl>
+		</div>
+	</div>
+</div>

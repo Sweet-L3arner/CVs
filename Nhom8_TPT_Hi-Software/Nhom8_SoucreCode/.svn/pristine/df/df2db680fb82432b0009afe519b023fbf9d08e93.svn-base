@@ -1,0 +1,10 @@
+﻿@model Models.Framework.LoaiSanPham
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.TenLoaiSanPham)</h2>
+
+@Html.Partial("_SanPhamPartial", Model.SanPhams)

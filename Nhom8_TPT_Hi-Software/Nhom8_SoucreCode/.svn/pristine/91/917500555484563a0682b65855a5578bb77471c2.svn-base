@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Models.Framework.DonDatHang>
+
+@{
+	ViewBag.Title = "Danh sách đơn hàng";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	var tinhTrang = "";
+}
+
+<style type="text/css">
+
+	table .table1 {
+		text-align: left;
+		margin-left: 0px;
+		margin-right: 0px;
+		width: 800px;
+	}
+
+	.tr, .td {
+		text-align: left;
+	}
+</style>
+
+<h2>Danh sách đơn đặt hàng</h2>
+<div>
+	@using (Html.BeginForm("Index", "DonDatHangA", FormMethod.Get))
+	{
+		@Html.AntiForgeryToken()
+
+		<table class="table1" align="center">
+			<tr>
+				<td>Mã đơn đặt hàng</td>
+				<td>
+					<input type="text" name="maDDH" value="@ViewBag.MaDDH" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Mã khách hàng</td>
+				<td>
+					<input type="text" name="maKH" value="@ViewBag.MaKH" />
+				</td>
+			</tr>
+
+			<tr>
+				<td>Tình trạng</td>
+				<td>
+					@if (@ViewBag.TinhTrang == null)
+					{
+						<input type="radio" name="TinhTrang" value="1" /><text>Đã đặt hàng &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="2" /><text>Đã đóng gói và vận chuyển &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="3" /><text>Hoàn thành &nbsp;</text>
+					}
+					else if (@ViewBag.TinhTrang == "1")
+					{
+						<input type="radio" name="TinhTrang" checked value="1" /><text>Đã đặt hàng &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="2" /><text>Đã đóng gói và vận chuyển &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="3" /><text>Hoàn thành &nbsp;</text>
+					}
+					else if (@ViewBag.TinhTrang == "2")
+					{
+						<input type="radio" name="TinhTrang" value="1" /><text>Đã đặt hàng &nbsp;</text>
+						<input type="radio" name="TinhTrang" checked value="2" /><text>Đã đóng gói và vận chuyển &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="3" /><text>Hoàn thành &nbsp;</text>
+					}
+					else if (@ViewBag.TinhTrang == "3")
+					{
+						<input type="radio" name="TinhTrang" value="1" /><text>Đã đặt hàng &nbsp;</text>
+						<input type="radio" name="TinhTrang" value="2" /><text>Đã đóng gói và vận chuyển &nbsp;</text>
+						<input type="radio" name="TinhTrang" checked value="3" /><text>Hoàn thành &nbsp;</text>
+					}
+				</td>
+			</tr>
+
+
+			<tr>
+				<td>
+					<input type="submit" name="submit" value="Tìm kiếm" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" />
+				</td>
+				<td>
+					<input type="button" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" onclick="location.href='@Url.Action("Index", "DonDatHangA")'" />
+				</td>
+			</tr>
+		</table>
+	}
+</div>
+
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.MaDonDatHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.MaKhachHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.MaNhanVien)
+		</th>
+		<th>
+			Đơn vị vận chuyển
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayDatHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayGiaoHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DiaChiGiao)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TinhTrang)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model.Reverse())
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaDonDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaKhachHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaNhanVien)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DonViVanChuyen.TenDonVi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayGiaoHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DiaChiGiao)
+			</td>
+			<td>
+				@{if (item.TinhTrang == 1)
+					{
+						tinhTrang = "Đã đặt hàng";
+					}
+					else if (item.TinhTrang == 2)
+					{
+						tinhTrang = "Đã đóng gói và vận chuyển";
+					}
+					else
+					{
+						tinhTrang = "Hoàng thành";
+					}
+				}
+				@tinhTrang
+			</td>
+
+			<td>
+				@Html.ActionLink("Cập nhật", "Edit", new { id = item.MaDonDatHang }) |
+				@Html.ActionLink("Chi tiết", "Details", new { id = item.MaDonDatHang }) |
+				@Html.ActionLink("Xóa", "Delete", new { id = item.MaDonDatHang })
+			</td>
+		</tr>
+	}
+
+</table>

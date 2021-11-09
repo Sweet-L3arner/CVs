@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Models.Framework.LoaiSanPham>
+
+@{
+	ViewBag.Title = "Loại sản phẩm";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	int i = 0;
+}
+
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		Loại sản phẩm
+	</div>
+	<p>
+		@Html.ActionLink("Tạo mới", "Create")
+	</p>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							Số thứ tự
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.TenLoaiSanPham)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.DVT)
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@{i++;}
+								@i
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.TenLoaiSanPham)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.DVT)
+							</td>
+							<td>
+								@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.MaLoaiSanPham }) |
+								@Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaLoaiSanPham }) |
+								@Html.ActionLink("Xóa", "Delete", new { id = item.MaLoaiSanPham })
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

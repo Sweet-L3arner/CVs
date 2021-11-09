@@ -1,0 +1,78 @@
+﻿@model Models.Framework.DonDatHang
+
+@{
+    ViewBag.Title = "Xóa đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Bạn có muốn xóa đơn hàng này</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDatHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDatHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayGiaoHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiaoHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaKhachHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaKhachHang)
+        </dd>
+
+        <dt>
+            Mã nhân viên cập nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaNhanVien)
+        </dd>
+
+        <dt>
+            Đơn vị vận chuyển
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonViVanChuyen.TenDonVi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>

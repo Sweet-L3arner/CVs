@@ -1,0 +1,35 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.PhanHoi>
+
+<style>
+	small {
+		color: #FDD017;
+		font-size: 20px;
+	}
+
+	h4 {
+		font-weight: bold;
+	}
+</style>
+<h4>Phản hồi (<small>★ ★ ★ ★ ☆</small>)</h4>
+<table class="table table-striped">
+
+	<thead>
+		<tr>
+			<th>Tên khách hàng</th>
+			<th>Nội dung</th>
+		</tr>
+	</thead>
+	@foreach (var item in Model)
+	{
+		<tr>
+
+			<td style="width: 250px;">@item.KhachHang.Ho @item.KhachHang.Ten</td>
+
+			<td>@item.PhanHoi1</td>
+		</tr>
+	}
+</table>
+
+
+
+

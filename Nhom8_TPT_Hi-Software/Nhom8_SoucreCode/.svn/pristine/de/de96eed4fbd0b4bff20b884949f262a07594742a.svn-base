@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Models.Framework.SanPham>
+
+@{
+	ViewBag.Title = "Danh sách sản phẩm";
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+	var grid = new WebGrid(Model, canPage: true, defaultSort: "TenSP", rowsPerPage: 10);
+	@Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+}
+
+<html>
+<head>
+	<style type="text/css">
+		.grid-footer {
+			color: #000;
+			font: 17px Calibri;
+			text-align: center;
+			font-weight: bold;
+		}
+
+			.grid-footer a {
+				background-color: #ffffff;
+				color: blue;
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+				padding: 1px 10px 2px 10px;
+			}
+
+				.grid-footer a:active, a:hover {
+					color: #FFAD33;
+					box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+				}
+
+		.alternatingRowStyle {
+			background-color: aliceblue;
+		}
+
+		table .table1 {
+			text-align: left;
+			margin-left: 0px;
+			margin-right: 0px;
+			width: 800px;
+		}
+
+		.tr, .td {
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<h3>Danh sách sản phẩm</h3>
+
+	<div>
+		@using (Html.BeginForm("Index", "SanPhamNV", FormMethod.Get))
+		{
+			@Html.AntiForgeryToken()
+
+			<table class="table1" align="center">
+				<tr>
+					<td>Mã sản phẩm</td>
+					<td>
+						<input type="text" name="maSP" value="@ViewBag.maSP" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Tên sản phẩm</td>
+					<td>
+						<input type="text" name="tenSP" value="@ViewBag.tenSP" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Loại sản phẩm</td>
+					<td>
+						@Html.DropDownList("MaLSP", null, "Tất cả", htmlAttributes: new { @class = "form-control col-md-12" })
+					</td>
+				</tr>
+
+				<tr>
+					<td>Nhãn hiệu</td>
+					<td>
+						@Html.DropDownList("MaNH", null, "Tất cả", htmlAttributes: new { @class = "form-control col-md-12" })
+					</td>
+				</tr>
+
+				<tr>
+					<td>Nơi sản xuất</td>
+					<td><input type="text" name="maSP" value="@ViewBag.NoiSanXuat" /></td>
+				</tr>
+
+				<tr>
+					<td>
+						Giá từ
+					</td>
+					<td>
+						<input type="text" name="giaMin" value="@ViewBag.GiaMin" /> đến <input type="text" name="giaMax" value="@ViewBag.GiaMax" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Tình trạng</td>
+					<td>
+						<input type="text" name="tinhTrang" value="@ViewBag.TinhTrang" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="submit" name="submit" value="Tìm kiếm" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" />
+					</td>
+					<td>
+						<input type="button" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" onclick="location.href='@Url.Action("Index", "SanPhamNV")'" />
+					</td>
+				</tr>
+			</table>
+
+
+		}
+	</div>
+
+	<div id="gridContent">
+		@ViewBag.TB
+		@grid.GetHtml(
+			tableStyle: "table table-bordered table-hover",
+			footerStyle: "grid-footer",
+			fillEmptyRows: true,
+			mode: WebGridPagerModes.Numeric,
+			alternatingRowStyle: "alternatingRowStyle",
+			  columns: new[]  // colums in grid
+			 {
+		//Số dòng
+		grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+		grid.Column("MaSanPham","Mã sản phẩm"), //the model fields to display
+		grid.Column("TenSanPham","Tên sản phẩm"),
+		grid.Column("NhanHieu.TenNhanHieu","Nhãn hiệu"  ),
+		grid.Column("LoaiSanPham.TenLoaiSanPham", "Loại sản phẩm"),
+		grid.Column("NoiSanXuat", "Nơi sản xuất"),
+		grid.Column("DonGia", "Đơn giá"),
+		grid.Column("TinhTrang", "Tình trạng"),
+		grid.Column("MoTa", "Mô tả"),
+		grid.Column("AnhSP", "Ảnh sản phẩm"),
+
+	@*grid.Column("Chức năng", format: @<text>
+	<a href="@Url.Action("Edit",
+                        new { id = item.MaSanPham})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><i class="bi bi-pencil"></i></abbr></a>
+	<a href="@Url.Action("Details",
+                        new { id = item.MaSanPham})" class="edit-btn"><abbr title="Xem chi tiết"><i class="bi bi-briefcase"></i></abbr></a>
+	<a href="@Url.Action("Delete",
+                        new { id = item.MaSanPham})" class="edit-btn">
+		<abbr title="Xóa dữ liệu">
+			<i class="bi bi-file-earmark-x"></i>
+		</abbr>
+	</a>
+	</text>),*@
+
+}
+)
+	</div>
+</body>
+</html>

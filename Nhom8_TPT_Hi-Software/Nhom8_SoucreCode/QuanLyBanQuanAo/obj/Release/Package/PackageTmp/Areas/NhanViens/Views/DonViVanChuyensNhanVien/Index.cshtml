@@ -1,0 +1,31 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.DonViVanChuyen>
+
+@{
+	ViewBag.Title = "Danh sách đơn vị vận chuyển";
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+	var grid = new WebGrid(Model, canPage: true, defaultSort: "TenDonVi", rowsPerPage: 5);
+}
+
+<h3 style="text-align:center;">Danh sách đơn vị vận chuyển</h3>
+
+<div id="gridContent">
+	@ViewBag.TB
+	@grid.GetHtml(
+		tableStyle: "table table-bordered table-hover",
+		footerStyle: "grid-footer",
+		fillEmptyRows: true,
+		mode: WebGridPagerModes.Numeric,
+		alternatingRowStyle: "alternatingRowStyle",
+		// Colums in grid.
+		columns: new[]
+								{
+		// Số dòng,
+		grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+		// The model fields to display.
+		grid.Column("MaDonVi","Mã đơn vị"),
+		grid.Column("TenDonVi","Tên đơn vị"),
+		grid.Column("SDT","Số điện thoại"),
+		grid.Column("Email","Email"),
+		grid.Column("Ảnh nhãn hiệu", format: @<text><img src="~/Images/shippers/@item.AnhDVVC" style="width:300px; height:150px" /></text>),
+ })
+</div>

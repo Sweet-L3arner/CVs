@@ -1,0 +1,165 @@
+﻿@model IEnumerable<Models.Framework.SanPham>
+
+@{
+	ViewBag.Title = "Tìm kiếm sản phẩm";
+	Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<html>
+<head>
+	<style type="text/css">
+
+
+		table .table1 {
+			text-align: left;
+			margin-left: 0px;
+			margin-right: 0px;
+			width: 800px;
+		}
+
+		.tr, .td {
+			text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		@using (Html.BeginForm("Index", "SanPHams", FormMethod.Get))
+		{
+			@Html.AntiForgeryToken()
+
+			<table class="table1" align="center">
+				<tr>
+					<td>Mã sản phẩm</td>
+					<td>
+						<input type="text" name="maSP" value="@ViewBag.maSP" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Tên sản phẩm</td>
+					<td>
+						<input type="text" name="tenSP" value="@ViewBag.tenSP" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Loại sản phẩm</td>
+					<td>
+						@Html.DropDownList("MaLSP", null, "Tất cả", htmlAttributes: new { @class = "form-control col-md-12" })
+					</td>
+				</tr>
+
+				<tr>
+					<td>Nhãn hiệu</td>
+					<td>
+						@Html.DropDownList("MaNH", null, "Tất cả", htmlAttributes: new { @class = "form-control col-md-12" })
+					</td>
+				</tr>
+
+				<tr>
+					<td>Nơi sản xuất</td>
+					<td><input type="text" name="noiSanXuat" value="@ViewBag.NoiSanXuat" /></td>
+				</tr>
+
+				<tr>
+					<td>
+						Giá từ
+					</td>
+					<td>
+						<input type="text" name="giaMin" value="@ViewBag.GiaMin" /> đến <input type="text" name="giaMax" value="@ViewBag.GiaMax" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>Tình trạng</td>
+					<td>
+						<input type="text" name="tinhTrang" value="@ViewBag.TinhTrang" />
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="submit" name="submit" value="Tìm kiếm" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" />
+					</td>
+					<td>
+						<input type="button" name="Nhapmoi" value="Nhập mới" style="margin-left: 5px;width:100px;
+				background-color: black;color:white" onclick="location.href='@Url.Action("Index", "SanPHams")'" />
+					</td>
+				</tr>
+			</table>
+
+
+		}
+	</div>
+
+	<h3>Danh sách sản phẩm</h3>
+
+	<table class="table">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.TenSanPham)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.LoaiSanPham.TenLoaiSanPham)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NhanHieu.TenNhanHieu)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.NoiSanXuat)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.DonGia)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TinhTrang)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.MoTa)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.AnhSP)
+			</th>
+			<th>Chi tiết</th>
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.TenSanPham)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NhanHieu.TenNhanHieu)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.NoiSanXuat)
+				</td>
+				<td>
+					@String.Format("{0:0,0}", item.DonGia) VND
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TinhTrang)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.MoTa)
+				</td>
+				<td>
+					<img src="~/Images/products/@Html.DisplayFor(modelItem => item.AnhSP)" alt="..." width="150" height="150" />
+				</td>
+				<td>
+					<a class="btn btn-success" href="@Url.Action("Details", "SanPhams",new { id = item.MaSanPham })">Chi tiết</a>
+				</td>
+			</tr>
+		}
+
+	</table>
+
+</body>
+</html>

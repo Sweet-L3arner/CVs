@@ -1,0 +1,20 @@
+﻿using Models.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace QuanLyBanQuanAo.Areas.NhanViens.Controllers
+{
+    public class LoaiSanPhamNVController : Controller
+    {
+        private QuanLyBanQuanAoEntities db = new QuanLyBanQuanAoEntities();
+
+        // GET: NhanViens/LoaiSanPhamNV
+        public ActionResult Index()
+        {
+            return View(db.LoaiSanPhams.ToList());
+        }
+    }
+}

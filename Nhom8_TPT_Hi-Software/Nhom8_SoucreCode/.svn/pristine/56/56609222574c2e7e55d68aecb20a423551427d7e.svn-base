@@ -1,0 +1,394 @@
+﻿USE master
+GO
+
+-- Drop the database if it already exists
+IF  EXISTS (
+	SELECT name 
+		FROM sys.databases 
+		WHERE name = N'QuanLyBanQuanAo6'
+)
+DROP DATABASE QuanLyBanQuanAo6
+GO
+
+CREATE DATABASE QuanLyBanQuanAo6
+GO
+
+-- =========================================
+-- Create table
+-- =========================================
+USE QuanLyBanQuanAo6
+GO
+-- LoaiSanPham table
+CREATE TABLE LoaiSanPham
+(
+	MaLoaiSanPham	[VARCHAR](20)	NOT NULL,
+	TenLoaiSanPham	[NVARCHAR](20)	NOT NULL,
+	DVT				[NVARCHAR](20)	NOT NULL,
+
+	CONSTRAINT PK_LoaiSanPham PRIMARY KEY (MaLoaiSanPham)
+)
+GO
+-- NhanHieu table
+CREATE TABLE NhanHieu
+(
+	MaNhanHieu	[VARCHAR](20)	NOT NULL,
+	TenNhanHieu	[NVARCHAR](30)	NOT NULL,
+	GhiChu		nvarchar(250) default(N'Đang cập nhật'),
+	AnhNH		[NVARCHAR](50),
+
+	CONSTRAINT PK_NhanHieu PRIMARY KEY (MaNhanHieu)
+)
+GO
+-- SanPham table
+CREATE TABLE SanPham
+(
+	MaSanPham		[VARCHAR](20)	NOT NULL,
+	TenSanPham		[NVARCHAR](250)	NOT NULL,
+	MaNhanHieu		[VARCHAR](20)	NOT NULL,
+	MaLoaiSanPham	[VARCHAR](20)	NOT NULL,
+	NoiSanXuat		[NVARCHAR](50)	NOT NULL,
+	DonGia			[INT] DEFAULT(0) NOT NULL,
+	TinhTrang		[NVARCHAR](20),
+	MoTa			[NTEXT],
+	AnhSP			[NVARCHAR](250),
+
+	CONSTRAINT PK_SanPham				PRIMARY KEY (MaSanPham),
+	CONSTRAINT FK_SanPham_LoaiSanPham	FOREIGN KEY (MaLoaiSanPham) REFERENCES LoaiSanPham	(MaLoaiSanPham)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+	CONSTRAINT FK_SanPham_NhanHieu		FOREIGN KEY (MaNhanHieu)	REFERENCES NhanHieu	(MaNhanHieu)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+)
+GO
+-- KhachHang table
+CREATE TABLE dbo.KhachHang
+(
+	MaKhachHang	[VARCHAR](20)	NOT NULL,
+	Ho			[NVARCHAR](100)	NOT NULL,
+	Ten			[NVARCHAR](50)	NOT NULL,
+	GioiTinh	[BIT] DEFAULT(1),
+	SDT			[VARCHAR](20)	NOT NULL,
+	Email		[VARCHAR](250)	NOT NULL,
+	MatKhau		[NVARCHAR](250)	NOT NULL,
+	TinhOrTP	[NVARCHAR](50)	NOT NULL,
+	DiaChi		[NVARCHAR](100)	NOT NULL,
+
+	CONSTRAINT PK_KhachHang PRIMARY KEY (MaKhachHang)
+)
+GO
+-- NhanVien table
+CREATE TABLE dbo.NhanVien
+(
+	MaNhanVien	[VARCHAR](20)	NOT NULL,
+	Ho			[NVARCHAR](50)	NOT NULL,
+	Ten			[NVARCHAR](20)	NOT NULL,
+	GioiTinh	[BIT] DEFAULT(1),
+	SDT			[VARCHAR](15)	NOT NULL,
+	Email		[VARCHAR](250)	NOT NULL,
+	MatKhau		[VARCHAR](250)	NOT NULL,
+	TrangThai	[NVARCHAR](15),
+	QuanLy		[BIT] default(0),
+	AnhNV		[NVARCHAR](250),
+
+	CONSTRAINT PK_NhanVien PRIMARY KEY (MaNhanVien),
+)
+GO
+
+-- Shipper table
+CREATE TABLE DonViVanChuyen
+(
+	MaDonVi		[VARCHAR](20)	NOT NULL,
+	TenDonVi	[NVARCHAR](100) NOT NULL,
+	SDT			[VARCHAR](20)	NOT NULL,
+	Email		[VARCHAR](100)	NOT NULL,
+	AnhDVVC		[NVARCHAR](250),
+
+	CONSTRAINT PK_DonViVanChuyen PRIMARY KEY (MaDonVi),
+)
+
+-- DonDatHang table
+CREATE TABLE dbo.DonDatHang
+(
+	MaDonDatHang		[VARCHAR](250)	NOT NULL,
+	MaKhachHang			[VARCHAR](20)	NOT NULL,
+	MaNhanVien			[VARCHAR](20),
+	MaDonViVanChuyen	[VARCHAR](20),
+	NgayDatHang			date,
+	NgayGiaoHang		date,
+	DiaChiGiao			[NVARCHAR](50),
+	TinhTrang			[INT],
+
+	CONSTRAINT PK_DonDatHang			PRIMARY KEY (MaDonDatHang),
+	CONSTRAINT FK_DonDatHang_KhachHang	FOREIGN KEY (MaKhachHang)	REFERENCES KhachHang(MaKhachHang)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+	CONSTRAINT FK_DonDatHang_NhanVien	FOREIGN KEY	(MaNhanVien)		REFERENCES NhanVien(MaNhanVien)
+	ON DELETE SET NULL,
+	CONSTRAINT FK_DonDatHang_Shipper	FOREIGN KEY (MaDonViVanChuyen)	REFERENCES DonViVanChuyen(MaDonVi)
+	ON DELETE SET NULL,
+)
+GO
+
+-- ChiTietDatHang table
+CREATE TABLE dbo.ChiTietDatHang
+(
+	MaDonDatHang	[VARCHAR](250)	NOT NULL,
+	MaSanPham		[VARCHAR](20)	NOT NULL,
+	SoLuong			[INT]		NOT NULL,
+	Gia				[INT]			NOT NULL,
+
+	CONSTRAINT PK_ChiTietDatHang			PRIMARY KEY (MaDonDatHang, MaSanPham),
+	CONSTRAINT FK_ChiTietDatHang_DonDatHang	FOREIGN KEY (MaDonDatHang) REFERENCES DonDatHang(MaDonDatHang)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+	CONSTRAINT FK_ChiTietDatHang_SanPham	FOREIGN KEY (MaSanPham) REFERENCES SanPham(MaSanPham)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+)
+GO
+-- Phanhoi table
+CREATE TABLE PhanHoi
+(
+	MaPhanHoi	[INT]	IDENTITY(1,1)	NOT NULL,
+	MaSanPham	[VARCHAR](20)			NOT NULL,
+	PhanHoi		[NVARCHAR](250) default(N'Không có phản hồi'),
+	MaKhachHang	[VARCHAR](20)			NOT NULL,
+
+	CONSTRAINT PK_PhanHoi				PRIMARY KEY (MaPhanHoi),
+	CONSTRAINT FK_PhanHoi_SanPham		FOREIGN KEY (MaSanPham)		REFERENCES SanPham(MaSanPham)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
+	CONSTRAINT FK_PhanHoi_MaKhachHang	FOREIGN KEY (MaKhachHang)	REFERENCES KhachHang(MaKhachHang)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+)
+GO
+
+-- nhật ký table
+create table NhatKy
+(
+	ID			bigint identity(1, 1),
+	Username	varchar(50),
+	TinhTrang	nvarchar(250),
+	ghiNho		datetime default(getdate()),
+
+	constraint PK_NhatKy primary key (ID)
+)
+
+--- create procedure
+-- nhân viên
+set ansi_nulls on
+go
+set quoted_identifier on
+go
+create proc [dbo].[Sp_QuanLy_Login]
+	@Email [varchar](250),
+	@Password [varchar](250),
+	@QuanLy	bit
+as
+begin
+	declare @count int
+	declare @res bit
+	select @count = count(*) from NhanVien where Email = @Email and MatKhau = @Password and QuanLy = @QuanLy
+	if @count > 0
+		set @res = 1
+	else
+		set @res = 0
+
+	select @res
+end
+
+-- khách hàng
+-- login
+set ansi_nulls on
+go
+set quoted_identifier on
+go
+create proc [dbo].[Sp_KhachHang_Login]
+	@Email [varchar](250),
+	@Password [varchar](250)
+as
+begin
+	declare @count int
+	declare @res bit
+	select @count = count(*) from KhachHang where Email = @Email and MatKhau = @Password
+	if @count > 0
+		set @res = 1
+	else
+		set @res = 0
+
+	select @res
+end
+-- regis
+create proc [dbo].[Sp_KhachHang_Regis]
+	@Email [varchar](250)
+as
+begin
+	declare @count int
+	declare @res bit
+	select @count = count(*) from KhachHang where Email = @Email
+	if @count > 0
+		set @res = 1
+	else
+		set @res = 0
+
+	select @res
+end
+
+
+
+--- Insert into
+-- Loại sản phẩm
+insert into LoaiSanPham 
+(MaLoaiSanPham, TenLoaiSanPham, DVT)
+values 
+('LSP001',N'Áo phông', N'Chiếc'),
+('LSP002',N'Áo khoác', N'Chiếc'),
+('LSP003',N'Quần dài', N'Chiếc'),
+('LSP004',N'Quần ngắn', N'Chiếc'),
+('LSP005',N'Túi xách', N'Chiếc'),
+('LSP006',N'Thắt lưng', N'Cái'),
+('LSP007',N'Nón', N'Cái'),
+('LSP008',N'Khăn choàng', N'Cái'),
+('LSP009',N'Mắt kính', N'Cặp'),
+('LSP010',N'Áo sơ mi', N'Chiếc')
+go
+-- nhãn hiệu
+insert into NhanHieu
+(MaNhanHieu, TenNhanHieu, GhiChu, AnhNH)
+values 
+('NH001', N'Dior' , '...', 'dior.jpg'),
+('NH002', N'Celine', '...', 'celine.jpg'),
+('NH003', N'Saint Laurent', '...', 'saintlaurent.jpg'),
+('NH004', N'Chanel', '...', 'chanel.jpg'),
+('NH005', N'Gucci', '...', 'gucci.jpg'),
+('NH006', N'Adidas', '...', 'adidas.jpg'),
+('NH007', N'Nike', '...', 'nike.jpg'),
+('NH008', N'Calvin Klein', '...', 'calvinklein.jpg'),
+('NH009', N'Puma', '...' , 'puma.jpg')
+go
+
+-- sản phẩm
+insert into SanPham
+(MaSanPham, TenSanPham, MaNhanHieu, MaLoaiSanPham, NoiSanXuat, DonGia, TinhTrang, MoTa, AnhSP)
+values 
+('SP0001', N'Áo phông Dior Spatial','NH001','LSP001',N'Ý',550000,N'Còn hàng',N'Nữ', 'sp1.png'),
+('SP0002', N'Áo phông I Love Paris','NH001','LSP001',N'Ý',650000,N'Còn hàng',N'Nam', 'sp2.png'),
+('SP0003', N'Áo phông Polo','NH001','LSP001',N'Ý',450000,N'Còn hàng',N'Nữ', 'sp3.png'),
+('SP0004', N'Áo Tay Ngắn Thể Thao Nike AS M NK DRY TEE LGD 2.0','NH007','LSP001',N'Mỹ',354000,N'Còn hàng',N'Nam', 'sp4.png'),
+('SP0005', N'Túi Nano Saddle','NH001','LSP005',N'Ý',3300000,N'Còn hàng',N'Nữ', 'sp5.png'),
+('SP0006', N'Túi Medium Lady D-Lite','NH001','LSP005',N'Ý',4500000,N'Còn hàng',N'Nữ', 'sp6.png'),
+('SP0007', N'Túi nấp gập Mini','NH004','LSP005',N'Pháp',10500000,N'Còn hàng',N'Nữ', 'sp7.png'),
+('SP0008', N'Áo khoác Single-Breasted','NH003','LSP002',N'Ý',1550000,N'Còn hàng',N'Nữ', 'sp8.png'),
+('SP0009', N'Áo khoác Black Double-Breasted','NH003','LSP002',N'Ý',2450000,N'Còn hàng',N'Nữ', 'sp9.png'),
+('SP0010', N'Áo khoác Firebird Classics Adicolor','NH006','LSP002',N'Đức',2000000,N'Còn hàng',N'Nam', 'sp10.png'),
+('SP0011', N'Quần Âu Gucci QAGH2','NH005','LSP003',N'Ý',1355000,N'Còn hàng',N'Nam', 'sp11.png'),
+('SP0012', N'Quần 3 sọc vải thun da cá Essentials','NH006','LSP003',N'Đức',1200000,N'Còn hàng',N'Nam', 'sp12.png'),
+('SP0013', N'Quần Jeans Margaret In Sunshine Wash Denim Sunshine Wash','NH002','LSP003',N'Pháp',3650000,N'Còn hàng',N'Nữ', 'sp13.png'),
+('SP0014', N'Quần Jeans Margaret In White Denim Optic White','NH002','LSP003',N'Pháp',4050000,N'Còn hàng',N'Nữ', 'sp14.png'),
+('SP0015', N'Nón Celine Bucket In Houndstooth Wool Multico','NH002','LSP007',N'Pháp',650000,N'Còn hàng',N'Nữ', 'sp15.png'),
+('SP0016', N'Nón Calvin Klein Accessories','NH008','LSP007',N'Mỹ',9250000,N'Còn hàng',N'Nam', 'sp16.png'),
+('SP0017', N'Nón Calvin Klein Adjustable Box Logo','NH008','LSP007',N'Mỹ',1125000,N'Còn hàng',N'Nam', 'sp17.png'),
+('SP0018', N'Thắt lưng da Chanel - Đen','NH004','LSP006',N'Pháp',1250000,N'Còn hàng',N'Nữ', 'sp18.png'),
+('SP0019', N'Thắt lưng vải Dior - Đen','NH001','LSP006',N'Ý',750000,N'Còn hàng',N'Nữ', 'sp19.png'),
+('SP0020', N'Thắt lưng da CD - Đen','NH001','LSP006',N'Ý',1450000,N'Còn hàng',N'Nữ', 'sp20.png'),
+('SP0021', N'Khăn choàng Yves Saint Laurent Leopard','NH003','LSP008',N'Ý',350000,N'Còn hàng',N'Nữ', 'sp21.png'),
+('SP0022', N'Khăn choàng GG silk-blend','NH005','LSP008',N'Ý',450000,N'Còn hàng',N'Nữ', 'sp22.png'),
+('SP0023', N'Áo sơ mi nam Cotton Gucci','NH005','LSP010',N'Ý',730000,N'Còn hàng',N'Nam', 'sp23.png'),
+('SP0024', N'Áo sơ mi cổ trụ dài tay Gucci','NH005','LSP010',N'Ý',750000,N'Còn hàng',N'Nam', 'sp24.png'),
+('SP0025', N'Áo sơ mi sọc Saint Laurent','NH003','LSP010',N'Ý',1060000,N'Còn hàng',N'Nam', 'sp25.png'),
+('SP0026', N'Áo sơ mi sọc Dior Homme','NH001','LSP010',N'Ý',2550000,N'Còn hàng',N'Nam', 'sp26.png'),
+('SP0027', N'Mắt kính mát Dior','NH001','LSP009',N'Ý',950000,N'Còn hàng',N'Nữ', 'sp27.png'),
+('SP0028', N'Kính mát Chirstian Dior Forerunner','NH001','LSP009',N'Ý',1550000,N'Còn hàng',N'Nam', 'sp28.png'),
+('SP0029', N'Kính mát dáng mắt mèo Chanel','NH004','LSP009',N'Pháp',3450000,N'Còn hàng',N'Nữ', 'sp29.png'),
+('SP0030', N'Mắt kính Pantos','NH004','LSP009',N'Pháp',2190000,N'Còn hàng',N'Nữ', 'sp30.png')
+
+-- khách hàng
+-- mật khẩu demo: 123 sau khi mã khóa md5: 202cb962ac59075b964b07152d234b70
+insert into KhachHang 
+(MaKhachHang, Ho, Ten, GioiTinh, SDT, Email, MatKhau, TinhOrTP, DiaChi)
+values 
+('KH0001',N'Lê Xuân',N'Tài',1,'0987456123','phuclh@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Nguyễn Khuyến'),
+('KH0002',N'Lê Quốc',N'Duy',1,'0987456111','duylq@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Phú Yên',N'23 Nguyễn Du, Đông Hòa, Tuy Hòa'),
+('KH0003',N'Võ Tuấn',N'Kiệt',1,'0987452222','kietvt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'21 Nguyễn Khuyến'),
+('KH0004',N'Lê Đức',N'Thắng',1,'0987453333','thangld@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Vũng Tàu', N'30 Nguyễn Thị Minh Khai'),
+('KH0005',N'Lê Thị Hoàng',N'Yến',0,'0987454444','yenlth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Cam Ranh', N'03 Lê Khuyến'),
+('KH0006',N'Bùi Thị Ngọc',N'Mai',0,'0987454545','maibtn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Khánh Hòa', N'Dục Mỹ, Ninh Hòa'),
+('KH0007',N'Lê Thị Thu',N'Trang',0,'0987455555','trangltt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'25 Nguyễn Trãi'),
+('KH0008',N'Mai Quỳnh',N'Hương',0,'0987456611','huongmq@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'18 Nguyễn Khuyến'),
+('KH0009',N'Ngô Thị Kim',N'Yến',0,'0987456133','yenntk@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'34 Nguyễn Khuyến'),
+('KH0010',N'Thái Hữu',N'Nhật',1,'0987454534','nhatth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0011',N'Lê Kim Thanh',N'Nga',0,'0987455656','ngalkt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Khánh Hòa', N'Bảy Búa, Ninh Thân'),
+('KH0012',N'Nguyễn Thị Ngọc',N'Diệu',0,'0987456666','dieuntn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'40 Đoàn Trần Nghiệp'),
+('KH0013',N'La Thị Hoài',N'Hoa',0,'0987455612','hoalth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'20 Đoàn Trần Nghiệp'),
+('KH0014',N'Lê Thị',N'Mỹ',0,'0987458787','mylt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'19 Nguyễn Khuyến'),
+('KH0015',N'Nguyễn Khánh',N'Hạ',0,'0987458888','hank@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đà Nẵng', N'15 Nguyễn Thiện Thuật'),
+('KH0016',N'Trần Thị Ni',N'Na',0,'0987459999','nattnn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Hà Nội', N'09 Hàng Bài'),
+('KH0017',N'Lê Thảo',N'Vy',0,'0987458989','vylt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đà Nẵng',N'30 Nguyễn Trãi'),
+('KH0018',N'Lê Thị Yến',N'Vi',0,'0987458008','vilty@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'19 Nguyễn Đình Chiểu'),
+('KH0019',N'Lê Thị Thanh',N'Vy',0,'0987453003','vyltt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0020',N'Trần Thị',N'Vân',0,'0987450081','vantt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Nguyễn Khuyến'),
+('KH0021',N'Trương Đình',N'Hoàng',1,'0987450980','hoangtd@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Du'),
+('KH0022',N'Lê Bảo',N'Long',1,'0987451029','longlb@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Hồ Chí Minh',N'01 Nguyễn Huệ'),
+('KH0023',N'Trần Minh',N'Lâm',1,'0987452340','lamtm@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Phú Yên',N'19 Nguyễn Trãi, Đông Hòa'),
+('KH0024',N'Trương Hoàng',N'Yến',0,'0987454051','yenth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Yersin'),
+('KH0025',N'Lê Ngọc',N'Tâm',0,'0987454770','tamln@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Mai Xuân Thưởng'),
+('KH0026',N'Võ Thị Ngọc',N'Yến',0,'0987458189','yenvtn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0027',N'Lê Thị Như',N'Ý',0,'0987455650','yltn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Khuyến'),
+('KH0028',N'Nguyễn Văn',N'Phước',1,'0987450911','phuocnv@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Du'),
+('KH0029',N'Lê Thanh',N'Phong',1,'0987451919','phonglt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Thị Minh Khai'),
+('KH0030',N'Mai Xuân',N'Huy',1,'0987452919','huymx@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'05 Nguyễn Trãi'),
+('KH0031',N'Lê Hữu',N'Phước',1,'0794508947','phuoc@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'132/Lưu Hữu Phước')
+
+-- nhân viên
+insert into NhanVien
+(MaNhanVien, Ho, Ten, GioiTinh, SDT, Email, MatKhau, TrangThai, QuanLy, AnhNV)
+values
+('NV000', 'Check', 'Check', 1, 00000000, 'check@gmail.com', '00000000', N'Dùng để check', 1, null),
+('NV001', N'Nguyễn Thị',N'Thắm',1,0931132321,'thamnt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',1,N'employee.png'),
+('NV002', N'Nguyễn Thị',N'Mai',1,0931132354,'maint@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV003', N'Nguyễn Thị',N'Nga',1,0931265321,'ngant@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV004', N'Nguyễn Thị',N'Đào',1,0931210031,'daont@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV005', N'Nguyễn Thị',N'Thủy',1,0949265321,'thuynt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV006', N'Nguyễn Thị',N'Liễu',1,0831265321,'lieunt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV007', N'Nguyễn Thị',N'Tuyết',1,0131265321,'tuyetnt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV008', N'Nguyễn Thị',N'Ngân',1,0231565321,'ngannt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV009', N'Nguyễn Thị',N'Hồng',1,0123155321,'hongnt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV010', N'Nguyễn Thị',N'Ngân',1,0231565321,'ngannt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV011', N'Bùi Ngọc',N'Hoa',1,0231995321,'hoabn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',1,N'employee.png'),
+('NV012', N'Bùi Ngọc',N'Thúy',1,0131995211,'thuybn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV013', N'Bùi Ngọc',N'Thọ',1,0531995211,'thobn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV014', N'Bùi Ngọc',N'Thoa',1,0431995211,'thoabn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV015', N'Bùi Ngọc',N'My',1,0531795211,'mybn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV016', N'Bùi Ngọc',N'Mỹ',1,0536995211,'mymybn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV017', N'Bùi Ngọc',N'Hương',1,0131995211,'huongbn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV018', N'Bùi Ngọc',N'Hường',1,0531988211,'huonghoabn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV019', N'Bùi Ngọc',N'Bích',1,0231995211,'bichbn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV020', N'Lê Nguyễn',N'Thương',1,0731995211,'thuongln@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',1,N'employee.png'),
+('NV021', N'Lê Nguyễn',N'Trà',1,0777995211,'traln@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV022', N'Lê Nguyễn',N'Trân',1,0931995211,'tranln@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV023', N'Lê Nguyễn',N'Trâm',1,0131995211,'tram@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV024', N'Lê Nguyễn',N'Vân',1,0231988211,'van@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV025', N'Lê Nguyễn',N'Vy',1,0111995211,'vy@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV026', N'Lê Nguyễn',N'Vi',1,0161996211,'vi@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV027', N'Lê Nguyễn',N'Trinh',1,0181999211,'trinh@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV028', N'Lê Nguyễn',N'Uyên',1,0161995291,'uyen@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV029', N'Lê Nguyễn',N'Ân',1,0136695211,'an@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png'),
+('NV030', N'Lê Nguyễn',N'Ánh',1,0131335211,'anh@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đang làm việc',0,N'employee.png')
+
+--- Đơn vị vận chuyển
+insert into DonViVanChuyen
+(MaDonVi, TenDonVi, SDT, Email, AnhDVVC)
+values
+('DVVC001', N'VNPost – EMS', '1900 545433', 'vnpostems@gmail.com', 'vietnampost.jpg'),
+('DVVC002', N'Viettel Post', '1800 8198', 'viettelpost@gmail.com', 'viettelpost.jpg'),
+('DVVC003', N'Giaohangnhanh', '1900 0218', 'giaohangnhanh@gmail.com', 'ghn.jpg'),
+('DVVC004', N'Giaohangtietkiem', '1800 6092', 'giaohangtietkiem@gmail.com', 'giaohangtietkiem.jpg'),
+('DVVC005', N'J&T Express', '1900 1088', 'jtexpress@gmail.com', 'jtexpress.jpeg')
+
+
+insert into DonDatHang
+(MaDonDatHang, MaKhachHang, MaNhanVien, MaDonViVanChuyen, NgayDatHang, NgayGiaoHang, DiaChiGiao)
+values
+('DH007', 'KH0031', 'NV001', 'DVVC001', '2021-06-30', '2021-07-30', 'A')

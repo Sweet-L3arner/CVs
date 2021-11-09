@@ -1,0 +1,77 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.DonDatHang>
+
+@{	var tinhTrang = ""; }
+
+<h3 style="text-align:center;">Danh sách đơn đặt hàng</h3>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.MaDonDatHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.MaKhachHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.MaNhanVien)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DonViVanChuyen)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayDatHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayGiaoHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DiaChiGiao)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TinhTrang)
+		</th>
+	</tr>
+
+	@foreach (var item in Model.Reverse())
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaDonDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaKhachHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaNhanVien)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DonViVanChuyen.TenDonVi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayGiaoHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DiaChiGiao)
+			</td>
+			<td>
+				@{if (item.TinhTrang == 1)
+					{
+						tinhTrang = "Đã đặt hàng";
+					}
+					else if (item.TinhTrang == 2)
+					{
+						tinhTrang = "Đã đóng gói và vận chuyển";
+					}
+					else
+					{
+						tinhTrang = "Hoàng thành";
+					}
+				}
+				@tinhTrang
+			</td>
+		</tr>
+	}
+</table>
+

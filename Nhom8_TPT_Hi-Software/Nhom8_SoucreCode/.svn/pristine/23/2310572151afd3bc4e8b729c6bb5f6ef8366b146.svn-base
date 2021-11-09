@@ -1,0 +1,15 @@
+-- Loại sản phẩm
+insert into LoaiSanPham 
+(MaLoaiSanPham, TenLoaiSanPham, DVT)
+values 
+('LSP001',N'Áo phông', N'Chiếc'),
+('LSP002',N'Áo khoác', N'Chiếc'),
+('LSP003',N'Quần dài', N'Chiếc'),
+('LSP004',N'Quần ngắn', N'Chiếc'),
+('LSP005',N'Túi xách', N'Chiếc'),
+('LSP006',N'Thắt lưng', N'Cái'),
+('LSP007',N'Nón', N'Cái'),
+('LSP008',N'Khăn choàng', N'Cái'),
+('LSP009',N'Mắt kính', N'Cặp'),
+('LSP010',N'Áo sơ mi', N'Chiếc')
+go

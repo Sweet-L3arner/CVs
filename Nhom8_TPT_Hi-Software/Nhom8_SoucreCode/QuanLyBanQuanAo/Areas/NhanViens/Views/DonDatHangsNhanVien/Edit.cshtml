@@ -1,0 +1,86 @@
+﻿@model QuanLyBanQuanAo.Models.DonDatHang
+
+@{
+	ViewBag.Title = "Cập nhật đơn hàng " + Model.MaDonDatHang;
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="text-align:center;">Cập nhật đơn hàng @Model.MaDonDatHang</h3>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="container">
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.MaDonDatHang)
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.MaKhachHang, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.MaKhachHang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+				@Html.ValidationMessageFor(model => model.MaKhachHang, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.MaNhanVien, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.MaNhanVien, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.MaNhanVien, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.MaDonViVanChuyen, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.DropDownList("MaDonViVanChuyen", null, htmlAttributes: new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.MaDonViVanChuyen, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.NgayDatHang, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.NgayDatHang, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+				@Html.ValidationMessageFor(model => model.NgayDatHang, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.NgayGiaoHang, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.NgayGiaoHang, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.NgayGiaoHang, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.DiaChiGiao, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.DiaChiGiao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+				@Html.ValidationMessageFor(model => model.DiaChiGiao, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group row">
+			@Html.LabelFor(model => model.TinhTrang, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				<div class="checkbox">
+					Đã đặt hàng @Html.RadioButtonFor(model => model.TinhTrang, 1, new { @checked = "checked" }) &nbsp;
+					Đã đóng gói và vận chuyển @Html.RadioButtonFor(model => model.TinhTrang, 2)
+					Đã giao hàng và thanh toán @Html.RadioButtonFor(model => model.TinhTrang, 3)
+					@Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Cập nhật" class="btn btn-warning" />
+			</div>
+		</div>
+	</div>
+}
+

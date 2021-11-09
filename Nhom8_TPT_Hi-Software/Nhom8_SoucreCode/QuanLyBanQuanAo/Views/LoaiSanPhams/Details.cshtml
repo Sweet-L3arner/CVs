@@ -1,0 +1,11 @@
+﻿@model QuanLyBanQuanAo.Models.LoaiSanPham
+
+@{
+	ViewBag.Title = "Details";
+	Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="text-align:center">@Html.DisplayFor(model => model.TenLoaiSanPham)</h2>
+
+@Html.Partial("_PartialSanPhamsCategory", Model.SanPhams)
+

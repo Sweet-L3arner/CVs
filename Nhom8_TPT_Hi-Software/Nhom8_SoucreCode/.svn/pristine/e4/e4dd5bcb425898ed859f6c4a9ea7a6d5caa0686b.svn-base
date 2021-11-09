@@ -1,0 +1,58 @@
+﻿@model Models.Framework.DonViVanChuyen
+
+@{
+	ViewBag.Title = "Thông tin đơn vị vận chuyển";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Thông tin đơn vị vận chuyển</h3>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200px" height="200px" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/shippers/@Html.DisplayFor(model => model.AnhDVVC)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.TenDonVi)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.TenDonVi)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.SDT)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.SDT)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Email)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Email)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.AnhDVVC)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.AnhDVVC)
+				</dd>
+
+			</dl>
+		</div>
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaDonVi }) |
+	@Html.ActionLink("Quay lại", "Index")
+</p>

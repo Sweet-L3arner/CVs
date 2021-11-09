@@ -1,0 +1,44 @@
+﻿@model QuanLyBanQuanAo.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Xóa loại sản phẩm: " + Model.TenLoaiSanPham;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="color: red; text-align:center;">Bạn có chắc chắn muốn xóa @Model.TenLoaiSanPham?</h3>
+<div class="container">
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.MaLoaiSanPham)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.MaLoaiSanPham)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.TenLoaiSanPham)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.TenLoaiSanPham)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.DVT)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.DVT)
+		</dd>
+
+	</dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+        </div>
+    }
+</div>

@@ -1,0 +1,35 @@
+
+-- sản phẩm
+insert into SanPham
+(MaSanPham, TenSanPham, MaNhanHieu, MaLoaiSanPham, NoiSanXuat, DonGia, TinhTrang, MoTa, AnhSP)
+values 
+('SP0001', N'OVERSIZED DIOR AND PETER DOIG T-SHIRT','NH001','LSP001',N'Ý',550000,N'Còn hàng',N'Nam', 'sp1.png'),
+('SP0002', N'CELINE LOOSE T-SHIRT IN COTTON JERSEY WITH STUDS BLACK','NH002','LSP001',N'Ý',650000,N'Còn hàng',N'Nam', 'sp2.png'),
+('SP0003', N'"SAINT LAURENT HEART" T-SHIRT','NH003','LSP001',N'Ý',450000,N'Còn hàng',N'Nữ', 'sp3.png'),
+('SP0004', N'QUILTED CARDIGAN IN VELVET JERSEY BLACK','NH002','LSP002',N'Mỹ',354000,N'Còn hàng',N'Nữ', 'sp4.png'),
+('SP0005', N'OFFICER COLLAR COAT','NH001','LSP002',N'Ý',3300000,N'Còn hàng',N'Nữ', 'sp5.png'),
+('SP0006', N'MASCULINE WOOL COAT','NH003','LSP002',N'Ý',4500000,N'Còn hàng',N'Nữ', 'sp6.png'),
+('SP0007', N'PANTABOOTS IN SUEDE','NH003','LSP003',N'Pháp',10500000,N'Còn hàng',N'Nữ', 'sp7.png'),
+('SP0008', N'TOILE DE JOUY PAJAMA PANTS','NH001','LSP003',N'Ý',1550000,N'Còn hàng',N'Nam', 'sp8.png'),
+('SP0009', N'SKATE PANTS IN STRIPED WOOL GABARDINE BLACK/ANTHRACITE','NH002','LSP003',N'Ý',2450000,N'Còn hàng',N'Nam', 'sp9.png'),
+('SP0010', N'Channel Shorts','NH004','LSP004',N'Đức',2000000,N'Còn hàng',N'Nam', 'sp10.png'),
+('SP0011', N'Cady crêpe silk wool shorts','NH005','LSP004',N'Ý',1355000,N'Còn hàng',N'Nữ', 'sp11.png'),
+('SP0012', N'QUẦN SHORT 3 SỌC KẺ','NH006','LSP004',N'Đức',1200000,N'Còn hàng',N'Nam', 'sp12.png'),
+('SP0013', N'2017 Re-Edition Dionysus python bag','NH005','LSP005',N'Pháp',3650000,N'Còn hàng',N'Nữ', 'sp13.png'),
+('SP0014', N'TÚI SHOPPING','NH004','LSP005',N'Pháp',4050000,N'Còn hàng',N'Nữ', 'sp14.png'),
+('SP0015', N'TÚI HER STUDIO LONDON','NH006','LSP005',N'Pháp',650000,N'Còn hàng',N'Nữ', 'sp15.png'),
+('SP0016', N'FQ2163','NH006','LSP006',N'Mỹ',9250000,N'Còn hàng',N'Nam', 'sp16.png'),
+('SP0017', N'THẮT LƯNG CHANEL','NH004','LSP006',N'Mỹ',1125000,N'Còn hàng',N'Nam', 'sp17.png'),
+('SP0018', N'Belt with G buckle','NH005','LSP006',N'Pháp',1250000,N'Còn hàng',N'Nữ', 'sp18.png'),
+('SP0019', N'Nike Sportswear','NH007','LSP007',N'Ý',750000,N'Còn hàng',N'Nam/Nữ', 'sp19.png'),
+('SP0020', N'Organic Cotton Canvas Monogram Logo Baseball Cap','NH008','LSP007',N'Ý',1450000,N'Còn hàng',N'Nam/Nữ', 'sp20.png'),
+('SP0021', N'Estate 2.0 Snapback','NH009','LSP007',N'Ý',350000,N'Còn hàng',N'Nam', 'sp21.png'),
+('SP0022', N'Emmitt Retro Logo Sneaker','NH008','LSP008',N'Ý',450000,N'Còn hàng',N'Nam', 'sp22.png'),
+('SP0023', N'Nike React Infinity Run FK 2 BeTrue','NH007','LSP008',N'Ý',730000,N'Còn hàng',N'Nam', 'sp23.png'),
+('SP0024', N'Future Rider NYC Women's Sneakers','NH009','LSP008',N'Ý',750000,N'Còn hàng',N'Nữ', 'sp24.png'),
+('SP0025', N'Ruby Oval Sunglasses','NH009','LSP009',N'Ý',1060000,N'Còn hàng',N'Nam', 'sp25.png'),
+('SP0026', N'Nike NIKE 5002 Eyeglasses','NH007','LSP009',N'Ý',2550000,N'Còn hàng',N'Nam', 'sp26.png'),
+('SP0027', N'Modified Rectangle Acetate Sunglasses','NH008','LSP009',N'Ý',950000,N'Còn hàng',N'Nữ', 'sp27.png'),
+('SP0028', N'DIOR AND PETER DOIG SHIRT','NH001','LSP010',N'Ý',1550000,N'Còn hàng',N'Nam', 'sp28.png'),
+('SP0029', N'HAWAIIAN SHIRT IN PRINTED VISCOSE NOIR/CRAIE','NH002','LSP010',N'Pháp',3450000,N'Còn hàng',N'Nam', 'sp29.png'),
+('SP0030', N'OVERSIZED SHIRT IN COTTON TWILL','NH003','LSP010',N'Pháp',2190000,N'Còn hàng',N'Nữ', 'sp30.png')

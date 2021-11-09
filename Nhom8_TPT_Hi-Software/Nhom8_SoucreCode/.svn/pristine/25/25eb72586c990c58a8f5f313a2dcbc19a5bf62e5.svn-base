@@ -1,0 +1,110 @@
+﻿@model Models.Framework.NhanVien
+
+@{
+	ViewBag.Title = "Thông tin nhân viên";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Thông tin nhân viên</h3>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200px" height="200px" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/staffs/@Html.DisplayFor(model => model.AnhNV)" />
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-9">
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.Ho)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Ho)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Ten)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Ten)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.GioiTinh)
+				</dt>
+
+				<dd>
+					@{ var gtinh = "";
+						if (Model.GioiTinh == true)
+						{ gtinh = "Nam"; }
+						else
+						{ gtinh = "Nữ"; }
+					}
+					@gtinh
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.SDT)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.SDT)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Email)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Email)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.MatKhau)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.MatKhau)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.TrangThai)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.TrangThai)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.QuanLy)
+				</dt>
+
+				<dd>
+					@{ var quanLy = "";
+						if (Model.QuanLy == true)
+						{ quanLy = "Quản lý"; }
+						else
+						{ quanLy = "Nhân viên"; }
+					}
+					@quanLy
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.AnhNV)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.AnhNV)
+				</dd>
+
+			</dl>
+		</div>
+	</div>
+</div>
+<p>
+	@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.MaNhanVien }) |
+	@Html.ActionLink("Quay lại", "Index")
+</p>

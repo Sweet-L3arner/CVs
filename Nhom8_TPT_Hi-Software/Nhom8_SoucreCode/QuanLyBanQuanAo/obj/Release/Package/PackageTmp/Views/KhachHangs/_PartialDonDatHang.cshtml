@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.DonDatHang>
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.MaDonDatHang)
+		</th>
+		<th>
+			Đơn vị vận chuyển
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayDatHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NgayGiaoHang)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DiaChiGiao)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.TinhTrang)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model.Reverse())
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.MaDonDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DonViVanChuyen.TenDonVi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayDatHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NgayGiaoHang)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.DiaChiGiao)
+			</td>
+			<td>
+				@{ var tinhTrang = "";
+
+					if (item.TinhTrang == 1)
+					{
+						tinhTrang = "Đã đặt hàng";
+					}
+					else if (item.TinhTrang == 2)
+					{
+						tinhTrang = "Đã đóng gói và vận chuyển";
+					}
+					else
+					{
+						tinhTrang = "Hoàng thành";
+					}
+				}
+				@tinhTrang
+			</td>
+
+			<td>
+				@Html.ActionLink("Chi tiết", "Details", "DonDatHangs", new { id = item.MaDonDatHang }, "")
+
+				<i class="bi bi-cart-plus-fill"></i>
+			</td>
+		</tr>
+	}
+
+</table>

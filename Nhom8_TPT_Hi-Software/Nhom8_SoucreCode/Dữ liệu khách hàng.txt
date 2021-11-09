@@ -1,0 +1,36 @@
+-- khách hàng
+-- mật khẩu demo: 123 sau khi mã khóa md5: 202cb962ac59075b964b07152d234b70
+insert into KhachHang 
+(MaKhachHang, Ho, Ten, GioiTinh, SDT, Email, MatKhau, TinhOrTP, DiaChi)
+values 
+('KH0001',N'Lê Xuân',N'Tài',1,'0987456123','phuclh@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Nguyễn Khuyến'),
+('KH0002',N'Lê Quốc',N'Duy',1,'0987456111','duylq@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Phú Yên',N'23 Nguyễn Du, Đông Hòa, Tuy Hòa'),
+('KH0003',N'Võ Tuấn',N'Kiệt',1,'0987452222','kietvt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'21 Nguyễn Khuyến'),
+('KH0004',N'Lê Đức',N'Thắng',1,'0987453333','thangld@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Vũng Tàu', N'30 Nguyễn Thị Minh Khai'),
+('KH0005',N'Lê Thị Hoàng',N'Yến',0,'0987454444','yenlth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Cam Ranh', N'03 Lê Khuyến'),
+('KH0006',N'Bùi Thị Ngọc',N'Mai',0,'0987454545','maibtn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Khánh Hòa', N'Dục Mỹ, Ninh Hòa'),
+('KH0007',N'Lê Thị Thu',N'Trang',0,'0987455555','trangltt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'25 Nguyễn Trãi'),
+('KH0008',N'Mai Quỳnh',N'Hương',0,'0987456611','huongmq@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'18 Nguyễn Khuyến'),
+('KH0009',N'Ngô Thị Kim',N'Yến',0,'0987456133','yenntk@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'34 Nguyễn Khuyến'),
+('KH0010',N'Thái Hữu',N'Nhật',1,'0987454534','nhatth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0011',N'Lê Kim Thanh',N'Nga',0,'0987455656','ngalkt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Khánh Hòa', N'Bảy Búa, Ninh Thân'),
+('KH0012',N'Nguyễn Thị Ngọc',N'Diệu',0,'0987456666','dieuntn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'40 Đoàn Trần Nghiệp'),
+('KH0013',N'La Thị Hoài',N'Hoa',0,'0987455612','hoalth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'20 Đoàn Trần Nghiệp'),
+('KH0014',N'Lê Thị',N'Mỹ',0,'0987458787','mylt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'19 Nguyễn Khuyến'),
+('KH0015',N'Nguyễn Khánh',N'Hạ',0,'0987458888','hank@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đà Nẵng', N'15 Nguyễn Thiện Thuật'),
+('KH0016',N'Trần Thị Ni',N'Na',0,'0987459999','nattnn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Hà Nội', N'09 Hàng Bài'),
+('KH0017',N'Lê Thảo',N'Vy',0,'0987458989','vylt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Đà Nẵng',N'30 Nguyễn Trãi'),
+('KH0018',N'Lê Thị Yến',N'Vi',0,'0987458008','vilty@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang', N'19 Nguyễn Đình Chiểu'),
+('KH0019',N'Lê Thị Thanh',N'Vy',0,'0987453003','vyltt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0020',N'Trần Thị',N'Vân',0,'0987450081','vantt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Nguyễn Khuyến'),
+('KH0021',N'Trương Đình',N'Hoàng',1,'0987450980','hoangtd@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Du'),
+('KH0022',N'Lê Bảo',N'Long',1,'0987451029','longlb@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Hồ Chí Minh',N'01 Nguyễn Huệ'),
+('KH0023',N'Trần Minh',N'Lâm',1,'0987452340','lamtm@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Phú Yên',N'19 Nguyễn Trãi, Đông Hòa'),
+('KH0024',N'Trương Hoàng',N'Yến',0,'0987454051','yenth@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'19 Yersin'),
+('KH0025',N'Lê Ngọc',N'Tâm',0,'0987454770','tamln@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Mai Xuân Thưởng'),
+('KH0026',N'Võ Thị Ngọc',N'Yến',0,'0987458189','yenvtn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Khuyến'),
+('KH0027',N'Lê Thị Như',N'Ý',0,'0987455650','yltn@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Khuyến'),
+('KH0028',N'Nguyễn Văn',N'Phước',1,'0987450911','phuocnv@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'40 Nguyễn Du'),
+('KH0029',N'Lê Thanh',N'Phong',1,'0987451919','phonglt@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'21 Nguyễn Thị Minh Khai'),
+('KH0030',N'Mai Xuân',N'Huy',1,'0987452919','huymx@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'05 Nguyễn Trãi'),
+('KH0031',N'Lê Hữu',N'Phước',1,'0794508947','phuoc@gmail.com',N'202cb962ac59075b964b07152d234b70',N'Nha Trang',N'132/Lưu Hữu Phước')

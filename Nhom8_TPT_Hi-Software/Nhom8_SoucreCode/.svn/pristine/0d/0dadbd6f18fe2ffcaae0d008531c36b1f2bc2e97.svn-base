@@ -1,0 +1,36 @@
+﻿using Models.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+
+namespace QuanLyBanQuanAo.Controllers
+{
+    public class NhanHieusController : Controller
+    {
+        private QuanLyBanQuanAoEntities db = new QuanLyBanQuanAoEntities();
+
+        // GET: NhanHieus
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Admin/NhanHieuA/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NhanHieu nhanHieu = db.NhanHieux.Find(id);
+            if (nhanHieu == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nhanHieu);
+        }
+    }
+}

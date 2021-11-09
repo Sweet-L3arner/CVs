@@ -1,0 +1,22 @@
+﻿@model IEnumerable <QuanLyBanQuanAo.Models.SanPham>
+
+@foreach (var item in Model)
+{
+	<div class="mb-4 d1 col-4">
+		<div class="card h-100">
+			<a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSanPham})">
+				<img class="card-img-top" src="~/Images/products/@Html.DisplayFor(modelItem => item.AnhSP)" alt="..." width="200" height="300" />
+			</a>
+			<div class="card-body">
+				<h4 class="card-title"><a href="@Url.Action("Details", "SanPhams", new { @id = item.MaSanPham})">@Html.DisplayFor(modelItem => item.TenSanPham)</a></h4>
+				<h5 class="donGia">@String.Format("{0:0,0}", item.DonGia) VND</h5>
+				<p class="card-text">@Html.DisplayFor(modelItem => item.MoTa)</p>
+			</div>
+		<div class="card-footer"><small>★ ★ ★ ★ ☆</small></div>
+		@using (Html.BeginForm("ThemGioHang", "GioHangs", new { @maSanPham = item.MaSanPham, @strURL = Request.Url.ToString() }))
+		{
+			<input type="submit" style="cursor:pointer" value="Chọn mua" class="btn btn-danger" />
+		}
+		</div>
+	</div>
+}

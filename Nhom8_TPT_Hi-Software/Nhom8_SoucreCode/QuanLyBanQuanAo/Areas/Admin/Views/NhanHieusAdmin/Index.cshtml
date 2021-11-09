@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.NhanHieu>
+
+@{
+	ViewBag.Title = "Danh sách nhãn hiệu";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	var grid = new WebGrid(Model, canPage: true, defaultSort: "TenNhanHieu", rowsPerPage: 5);
+}
+
+<h3 style="text-align:center;">Danh sách nhãn hiệu</h3>
+<p>
+	@Html.ActionLink("Thêm mới nhãn hiệu", "Create", "", new { @class = "btn btn-primary" })
+</p>
+
+<div id="gridContent">
+	@ViewBag.TB
+	@grid.GetHtml(
+		tableStyle: "table table-bordered table-hover",
+		footerStyle: "grid-footer",
+		fillEmptyRows: true,
+		mode: WebGridPagerModes.Numeric,
+		alternatingRowStyle: "alternatingRowStyle",
+		// Colums in grid.
+		columns: new[]
+								{
+		// Số dòng,
+		grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+		// The model fields to display.
+		grid.Column("MaNhanHieu","Mã nhãn hiệu"),
+		grid.Column("TenNhanHieu","Tên nhãn hiệu"),
+		grid.Column("GhiChu","Ghi chú"),
+		grid.Column("Ảnh nhãn hiệu", format: @<text><img src="~/Images/brands/@item.AnhNH" style="width:300px; height:150px" /></text>),
+		grid.Column("Chức năng", format: @<text>
+		<a href="@Url.Action("Edit", new { id = item.MaNhanHieu})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><i class="bi bi-pencil"></i></abbr></a>
+		<a href="@Url.Action("Details",new { id = item.MaNhanHieu})" class="edit-btn"><abbr title="Xem chi tiết"><i class="bi bi-briefcase"></i></abbr></a>
+		<a href="@Url.Action("Delete",new { id = item.MaNhanHieu})" class="edit-btn"><abbr title="Xóa dữ liệu"><i class="bi bi-file-earmark-x"></i></abbr></a>
+		</text>),
+ })
+</div>

@@ -1,0 +1,35 @@
+
+-- sản phẩm
+insert into SanPham
+(MaSanPham, TenSanPham, MaNhanHieu, MaLoaiSanPham, NoiSanXuat, DonGia, TinhTrang, MoTa, AnhSP)
+values 
+('SP0001', N'Áo phông Dior Spatial','NH001','LSP001',N'Ý',550000,N'Còn hàng',N'Nữ', 'sp1.png'),
+('SP0002', N'Áo phông I Love Paris','NH001','LSP001',N'Ý',650000,N'Còn hàng',N'Nam', 'sp2.png'),
+('SP0003', N'Áo phông Polo','NH001','LSP001',N'Ý',450000,N'Còn hàng',N'Nữ', 'sp3.png'),
+('SP0004', N'Áo Tay Ngắn Thể Thao Nike AS M NK DRY TEE LGD 2.0','NH007','LSP001',N'Mỹ',354000,N'Còn hàng',N'Nam', 'sp4.png'),
+('SP0005', N'Túi Nano Saddle','NH001','LSP005',N'Ý',3300000,N'Còn hàng',N'Nữ', 'sp5.png'),
+('SP0006', N'Túi Medium Lady D-Lite','NH001','LSP005',N'Ý',4500000,N'Còn hàng',N'Nữ', 'sp6.png'),
+('SP0007', N'Túi nấp gập Mini','NH004','LSP005',N'Pháp',10500000,N'Còn hàng',N'Nữ', 'sp7.png'),
+('SP0008', N'Áo khoác Single-Breasted','NH003','LSP002',N'Ý',1550000,N'Còn hàng',N'Nữ', 'sp8.png'),
+('SP0009', N'Áo khoác Black Double-Breasted','NH003','LSP002',N'Ý',2450000,N'Còn hàng',N'Nữ', 'sp9.png'),
+('SP0010', N'Áo khoác Firebird Classics Adicolor','NH006','LSP002',N'Đức',2000000,N'Còn hàng',N'Nam', 'sp10.png'),
+('SP0011', N'Quần Âu Gucci QAGH2','NH005','LSP003',N'Ý',1355000,N'Còn hàng',N'Nam', 'sp11.png'),
+('SP0012', N'Quần 3 sọc vải thun da cá Essentials','NH006','LSP003',N'Đức',1200000,N'Còn hàng',N'Nam', 'sp12.png'),
+('SP0013', N'Quần Jeans Margaret In Sunshine Wash Denim Sunshine Wash','NH002','LSP003',N'Pháp',3650000,N'Còn hàng',N'Nữ', 'sp13.png'),
+('SP0014', N'Quần Jeans Margaret In White Denim Optic White','NH002','LSP003',N'Pháp',4050000,N'Còn hàng',N'Nữ', 'sp14.png'),
+('SP0015', N'Nón Celine Bucket In Houndstooth Wool Multico','NH002','LSP007',N'Pháp',650000,N'Còn hàng',N'Nữ', 'sp15.png'),
+('SP0016', N'Nón Calvin Klein Accessories','NH008','LSP007',N'Mỹ',9250000,N'Còn hàng',N'Nam', 'sp16.png'),
+('SP0017', N'Nón Calvin Klein Adjustable Box Logo','NH008','LSP007',N'Mỹ',1125000,N'Còn hàng',N'Nam', 'sp17.png'),
+('SP0018', N'Thắt lưng da Chanel - Đen','NH004','LSP006',N'Pháp',1250000,N'Còn hàng',N'Nữ', 'sp18.png'),
+('SP0019', N'Thắt lưng vải Dior - Đen','NH001','LSP006',N'Ý',750000,N'Còn hàng',N'Nữ', 'sp19.png'),
+('SP0020', N'Thắt lưng da CD - Đen','NH001','LSP006',N'Ý',1450000,N'Còn hàng',N'Nữ', 'sp20.png'),
+('SP0021', N'Khăn choàng Yves Saint Laurent Leopard','NH003','LSP008',N'Ý',350000,N'Còn hàng',N'Nữ', 'sp21.png'),
+('SP0022', N'Khăn choàng GG silk-blend','NH005','LSP008',N'Ý',450000,N'Còn hàng',N'Nữ', 'sp22.png'),
+('SP0023', N'Áo sơ mi nam Cotton Gucci','NH005','LSP010',N'Ý',730000,N'Còn hàng',N'Nam', 'sp23.png'),
+('SP0024', N'Áo sơ mi cổ trụ dài tay Gucci','NH005','LSP010',N'Ý',750000,N'Còn hàng',N'Nam', 'sp24.png'),
+('SP0025', N'Áo sơ mi sọc Saint Laurent','NH003','LSP010',N'Ý',1060000,N'Còn hàng',N'Nam', 'sp25.png'),
+('SP0026', N'Áo sơ mi sọc Dior Homme','NH001','LSP010',N'Ý',2550000,N'Còn hàng',N'Nam', 'sp26.png'),
+('SP0027', N'Mắt kính mát Dior','NH001','LSP009',N'Ý',950000,N'Còn hàng',N'Nữ', 'sp27.png'),
+('SP0028', N'Kính mát Chirstian Dior Forerunner','NH001','LSP009',N'Ý',1550000,N'Còn hàng',N'Nam', 'sp28.png'),
+('SP0029', N'Kính mát dáng mắt mèo Chanel','NH004','LSP009',N'Pháp',3450000,N'Còn hàng',N'Nữ', 'sp29.png'),
+('SP0030', N'Mắt kính Pantos','NH004','LSP009',N'Pháp',2190000,N'Còn hàng',N'Nữ', 'sp30.png')

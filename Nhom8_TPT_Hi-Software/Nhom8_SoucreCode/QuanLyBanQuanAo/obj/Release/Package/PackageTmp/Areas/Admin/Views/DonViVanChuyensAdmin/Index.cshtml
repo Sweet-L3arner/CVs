@@ -1,0 +1,40 @@
+﻿@model IEnumerable<QuanLyBanQuanAo.Models.DonViVanChuyen>
+
+@{
+	ViewBag.Title = "Danh sách đơn vị vận chuyển";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+	var grid = new WebGrid(Model, canPage: true, defaultSort: "TenDonVi", rowsPerPage: 5);
+
+}
+
+<h3 style="text-align:center;">Danh sách đơn vị vận chuyển</h3>
+<p>
+	@Html.ActionLink("Thêm đơn vị vận chuyển mới", "Create", "", new { @class = "btn btn-primary" })
+</p>
+
+<div id="gridContent">
+	@ViewBag.TB
+	@grid.GetHtml(
+		tableStyle: "table table-bordered table-hover",
+		footerStyle: "grid-footer",
+		fillEmptyRows: true,
+		mode: WebGridPagerModes.Numeric,
+		alternatingRowStyle: "alternatingRowStyle",
+		// Colums in grid.
+		columns: new[]
+								{
+		// Số dòng,
+		grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+		// The model fields to display.
+		grid.Column("MaDonVi","Mã đơn vị"),
+		grid.Column("TenDonVi","Tên đơn vị"),
+		grid.Column("SDT","Số điện thoại"),
+		grid.Column("Email","Email"),
+		grid.Column("Ảnh nhãn hiệu", format: @<text><img src="~/Images/shippers/@item.AnhDVVC" style="width:300px; height:150px" /></text>),
+		grid.Column("Chức năng", format: @<text>
+		<a href="@Url.Action("Edit", new { id = item.MaDonVi})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><i class="bi bi-pencil"></i></abbr></a>
+		<a href="@Url.Action("Details",new { id = item.MaDonVi})" class="edit-btn"><abbr title="Xem chi tiết"><i class="bi bi-briefcase"></i></abbr></a>
+		<a href="@Url.Action("Delete",new { id = item.MaDonVi})" class="edit-btn"><abbr title="Xóa dữ liệu"><i class="bi bi-file-earmark-x"></i></abbr></a>
+		</text>),
+ })
+</div>

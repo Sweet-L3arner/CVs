@@ -1,0 +1,39 @@
+﻿@model QuanLyBanQuanAo.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2 style="color: red">Bạn có chắc chắn muốn xóa loại sản phẩm này?</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoaiSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoaiSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DVT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DVT)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Quai lại", "Index")
+        </div>
+    }
+</div>

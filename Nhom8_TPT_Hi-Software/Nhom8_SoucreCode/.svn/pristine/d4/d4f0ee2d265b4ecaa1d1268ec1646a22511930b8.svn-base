@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22ae849a1e454871b7a4a89d35b57b2c" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.ChiTietDatHang" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.DonDatHang" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.DonViVanChuyen" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.KhachHang" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.LoaiSanPham" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.NhanHieu" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.NhanVien" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.PhanHoi" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.SanPham" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_ChiTietDatHang_DonDatHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_ChiTietDatHang_SanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_DonDatHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_DonDatHang_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_DonDatHang_Shipper" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_PhanHoi_MaKhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_SanPham_LoaiSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_SanPham_NhanHieu" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBanQuanAo6Model.FK_PhanHoi_SanPham" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLyBanQuanAo6Model.NhatKy" Width="1.5" PointX="5.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

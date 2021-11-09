@@ -1,0 +1,68 @@
+﻿@model QuanLyBanQuanAo.Models.DonDatHang
+@{
+	ViewBag.Title = "Chi tiết đơn hàng: " + Model.MaDonDatHang;
+	Layout = "~/Areas/NhanViens/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết đơn hàng @Model.MaDonDatHang</h2>
+
+<div>
+	<hr />
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-2">
+			<dl class="dl-horizontal">
+				<dt>@Html.DisplayNameFor(model => model.MaKhachHang)</dt>
+				<dd>@Html.DisplayFor(model => model.MaKhachHang)</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.MaNhanVien)</dt>
+				<dd>@Html.DisplayFor(model => model.MaNhanVien)</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.DonViVanChuyen)</dt>
+				<dd>@Html.DisplayFor(model => model.DonViVanChuyen.TenDonVi)</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.NgayDatHang)</dt>
+				<dd>@Model.NgayDatHang.Value.ToString("dd/MM/yyyy")</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.NgayGiaoHang)</dt>
+				<dd>
+					@if (Model.NgayGiaoHang == null)
+					{
+						<p>Chưa đặt ngày giao</p>
+					}
+					else
+					{
+						Model.NgayGiaoHang.Value.ToString("dd/MM/yyyy");
+					}
+				</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.DiaChiGiao)</dt>
+				<dd>@Html.DisplayFor(model => model.DiaChiGiao)</dd>
+
+				<dt>@Html.DisplayNameFor(model => model.TinhTrang)</dt>
+				<dd>
+					@{ 
+						var tinhTrang = "";
+						if (Model.TinhTrang == 1)
+						{
+							tinhTrang = "Đã đặt hàng";
+						}
+						else if (Model.TinhTrang == 2)
+						{
+							tinhTrang = "Đã đóng gói và đang vận chuyển";
+						}
+						else
+						{
+							tinhTrang = "Đã giao hàng và thanh toán";
+						}
+					}
+					@tinhTrang
+				</dd>
+			</dl>
+		</div>
+		<div class="col-md-1"></div>
+		<div class="col-md-8">
+			@Html.Partial("_PartialChiTietDatHangs", Model.ChiTietDatHangs)
+		</div>
+	</div>
+</div>

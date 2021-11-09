@@ -1,0 +1,86 @@
+﻿@model QuanLyBanQuanAo.Models.DonViVanChuyen
+
+@{
+	ViewBag.Title = "Cập nhật thông tin đơn vị vận chuyển";
+	Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 style="text-align:center;">Chỉnh sửa thông tin đơn vị vận chuyển</h3>
+
+@using (Html.BeginForm("Edit", "DonViVanChuyensAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	<div class="row">
+		<div class="col-md-2">
+			<img width="200" height="200" style="border-radius:50%;margin-left:30px;margin-top:20px;" src="~/Images/shippers/@Html.DisplayFor(model => model.AnhDVVC)" />
+		</div>
+		<div class="col-md-1">
+
+		</div>
+		<div class="col-md-9">
+			<div class="form-horizontal">
+				<hr />
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				@Html.HiddenFor(model => model.MaDonVi)
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.TenDonVi, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.TenDonVi, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.TenDonVi, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.AnhDVVC, htmlAttributes: new { @class = "control-label col-md-3" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.AnhDVVC, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+						@Html.ValidationMessageFor(model => model.AnhDVVC, "", new { @class = "text-danger" })
+						<input type="file" name="Avatar" id="Avatar" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Lưu" class="btn btn-warning" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@section scripts
+{
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var fileupload = $("#Avatar");
+			var image = $("#FileUpload");
+			image.click(function () {
+				fileupload.click();
+			});
+			fileupload.change(function () {
+				var fileName = $(this).val().split('\\')[$(this).val().split('\\').length - 1];
+				document.getElementById("AnhDVVC").value = fileName;
+			});
+		});
+	</script>	
+}

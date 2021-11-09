@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Models.Framework.SanPham>
+
+<div class="card mb-4">
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		Danh sách sản phẩm
+	</div>
+	@*<p>
+			@Html.ActionLink("Tạo mới", "Create")
+		</p>*@
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							Mã sản phẩm
+						</th>
+						<th>
+							Tên sản phẩm
+						</th>
+						<th>
+							Nơi sản xuất
+						</th>
+						<th>
+							Đơn giá
+						</th>
+						<th>
+							Tình trạng
+						</th>
+						<th>
+							Mô tả
+						</th>
+						<th>
+							Loại sản phẩm
+						</th>
+						<th>
+							Ảnh sản phẩm
+						</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@Html.DisplayFor(modelItem => item.MaSanPham)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.TenSanPham)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.NoiSanXuat)
+							</td>
+							<td>
+								@String.Format("{0:0,0}", item.DonGia) VND
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.TinhTrang)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.MoTa)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.LoaiSanPham.TenLoaiSanPham)
+							</td>
+							<td>
+								<img src="~/Images/products/@Html.DisplayFor(modelItem => item.AnhSP)" width="150" height="150" />
+							</td>
+							<td>
+								@using (Html.BeginForm("ThemGioHang", "GioHang", new { @cMaSanPham = item.MaSanPham, @strURL = Request.Url.ToString() }))
+								{
+									<input type="submit" style="cursor:pointer" value="Chọn mua" class="btn btn-danger" />
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
